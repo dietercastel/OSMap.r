@@ -1,115 +1,14 @@
 #=
 -          het gebruik van vaste camera's op zichtbare wijze door de politiezone Leuven op de volgende niet-besloten plaatsen:
 
-·         Augustijnenstraat;
-
-·         Boekhandelstraat;
-
-·         Bogaardenstraat;
-
-·         Bondgenotenlaan;
-
-·         Brusselsestraat;
-
-·         Collegeberg;
-
-·         Den Tempst;
-
-·         Diestsestraat;
-
-·         Diestsevest;
-
-·         Dirk Boutslaan;
-
-·         Drie-Engelenberg;
-
-·         Ferdinand Smoldersplein;
-
-·         Goudsbloemstraat;
-
-·         Grote Markt;
-
-·         Herbert Hooverplein;
-
-·         Hoegaardsestraat;
-
-·         Hogeschoolplein;
-
-·         Kapucijnenvoer;
-
-·         Kiekenstraat;
-
-·         Kortestraat;
-
-·         Krakenstraat;
-
-·         Kroegberg;
-
-·         Lavorenberg;
-
-·         Leopold Vanderkelenstraat;
-
-·         Louis Melsensstraat;
-
-·         Margarethaplein;
-
-·         Martelarenplein;
-
-·         Mechelsestraat;
-
-·         Minderbroedersstraat;
-
-·         Monseigneur Ladeuzeplein;
-
-·         Muntstraat;
-
-·         Naamsestraat;
-
-·         Nieuwe Kerkhofdreef;
-
-·         Oostertunnel;
-
-·         Oudebaan;
-
-·         Parijsstraat;
-
-·         perrons De Lijn;
-
-·         Philipssite;
-
-·         Pierre Joseph Van Benedenstraat;
-
-·         Rector De Somerplein;
-
-·         Schrijnmakersstraat;
-
-·         Sint-Barbarastraat;
-
-·         Sint-Maartenstraat;
-
-·         's-Meiersstraat;
-
-·         Tiensestraat;
-
-·         Tiensevest;
-
-·         Vaartstraat;
-
-·         Vismarkt;
-
-·         Vissersstraat;
-
-·         Vital Decosterstraat;
-
-·         Waaistraat;
-
-·         Wandelingstraat;
-
-·         Zeelstraat.
+see streetlist
 
 -          het gebruik van vaste ANPR-camera's op zichtbare wijze door de politiezone Leuven op de volgende niet-besloten plaatsen:
 
 ·         Augustijnenstraat (werd niet geplaatst);
+·         Ferdinand Smoldersplein (geen nummering);
+·         Lavorenberg (geen nummering);
+·         Martelarenplein (geen nummering);
 
 ·         Bogaardenstraat 27;
 
@@ -123,8 +22,6 @@
 
 ·         Dirk Boutslaan 25;
 
-·         Ferdinand Smoldersplein (geen nummering);
-
 ·         Goudsbloemstraat 1;
 
 ·         Herbert Hooverplein 24;
@@ -134,10 +31,6 @@
 ·         Kapucijnenvoer 8;
 
 ·         Krakenstraat 7;
-
-·         Lavorenberg (geen nummering);
-
-·         Martelarenplein (geen nummering);
 
 ·         Mechelsestraat 50;
 
@@ -171,6 +64,161 @@
 =#
 
 using HTTP
+
+streetlist = [
+				"Augustijnenstraat",
+
+				"Boekhandelstraat",
+
+				"Bogaardenstraat",
+
+				"Bondgenotenlaan",
+
+				"Brusselsestraat",
+
+				"Collegeberg",
+
+				"Den Tempst",
+
+				"Diestsestraat",
+
+				"Diestsevest",
+
+				"Dirk Boutslaan",
+
+				"Drie-Engelenberg",
+
+				"Ferdinand Smoldersplein",
+
+				"Goudsbloemstraat",
+
+				"Grote Markt",
+
+				"Herbert Hooverplein",
+
+				"Hoegaardsestraat",
+
+				"Hogeschoolplein",
+
+				"Kapucijnenvoer",
+
+				"Kiekenstraat",
+
+				"Kortestraat",
+
+				"Krakenstraat",
+
+				"Kroegberg",
+
+				"Lavorenberg",
+
+				"Leopold Vanderkelenstraat",
+
+				"Louis Melsensstraat",
+
+				"Margarethaplein",
+
+				"Martelarenplein",
+
+				"Mechelsestraat",
+
+				"Minderbroedersstraat",
+
+				"Monseigneur Ladeuzeplein",
+
+				"Muntstraat",
+
+				"Naamsestraat",
+
+				"Nieuwe Kerkhofdreef",
+
+				"Oostertunnel",
+
+				"Oudebaan",
+
+				"Parijsstraat",
+
+				"perrons De Lijn",
+
+				"Philipssite",
+
+				"Pierre Joseph Van Benedenstraat",
+
+				"Rector De Somerplein",
+
+				"Schrijnmakersstraat",
+
+				"Sint-Barbarastraat",
+
+				"Sint-Maartenstraat",
+
+				"'s-Meiersstraat",
+
+				"Tiensestraat",
+
+				"Tiensevest",
+
+				"Vaartstraat",
+
+				"Vismarkt",
+
+				"Vissersstraat",
+
+				"Vital Decosterstraat",
+
+				"Waaistraat",
+
+				"Wandelingstraat",
+
+				"Zeelstraat"
+			  ]
+
+anprlist = [
+				"Bogaardenstraat 27",
+
+				"Bondgenotenlaan 34",
+
+				"Brusselsestraat 21 en 24",
+
+				"Collegeberg 20",
+
+				"Diestsestraat 62, 48, 139, 128, 261, 233, 185",
+
+				"Dirk Boutslaan 25",
+
+				"Goudsbloemstraat 1",
+
+				"Herbert Hooverplein 24",
+
+				"Hoegaardsestraat 2",
+
+				"Kapucijnenvoer 8",
+
+				"Krakenstraat 7",
+
+				"Mechelsestraat 50",
+
+				"Monseigneur Ladeuzeplein 17 en 24",
+
+				"Naamsestraat 7",
+
+				"Oudebaan 407",
+
+				"Parijsstraat 59, 72 en 80",
+
+				"Schrijnmakersstraat 18",
+
+				"’s-Meiersstraat 2",
+
+				"Tiensestraat 62",
+
+				"Vissersstraat (niet geplaatst)",
+
+				"Vital Decosterstraat 9",
+
+				"Wandelingstraat 11",
+			
+			]
 
 headers = ["User-Agent"=>"wmleuv"]
 

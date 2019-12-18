@@ -13,6 +13,7 @@ using RCall
 println(R"
 library(tidyverse)
 library(osmdata)
+library(sf)
 streets <- getbb(\"Leuven, Belgium\")%>%
 	opq()%>%
 	add_osm_feature(key = \"highway\", 

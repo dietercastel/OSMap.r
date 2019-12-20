@@ -1,11 +1,15 @@
 library(tidyverse)
 library(osmdata)
 library(sf)
+library(purrr)
 #library(tmap)
 #library(tmaptools)
 load("/tmp/wmleuv/streets.Rdata")
 load("/tmp/wmleuv/smallstreets.Rdata")
 load("/tmp/wmleuv/dijle.Rdata")
+load("/tmp/wmleuv/streetsAllowedOSM.Rdata")
+load("/tmp/wmleuv/anprNotWorkingOSM.Rdata")
+load("/tmp/wmleuv/sfAStreets.Rdata")
 #hhstr<-sf::st_read("/tmp/wmleuv/hhstr.osm", layer = 'points')
 leuvCoord <-getbb("Leuven Belgium")
 print(leuvCoord)
@@ -31,6 +35,18 @@ print(sfworkingANPR)
 
 print(xbounds)
 print(ybounds)
+print(sfAStreets)
+
+getLines <- function(osmdataObj){
+	osmdataObj$osm_lines
+}
+
+sfALines <- sfAStreets%>%
+	map(getLines)
+
+#sfAlinesDf <- data.frame(matrix(unlist(sfALines), nrow=length(sfALines), byrow=T))
+
+#print(sfALines)
 
 ggplot() +
   geom_sf(data = streets$osm_lines,
@@ -57,6 +73,10 @@ ggplot() +
 		  size = 4, 
 		  shape = shapesworkingANPR,
 		  fill = "darkred") +
+  #geom_sf(data = sfAlinesDf,
+#		  size = 4, 
+#		  shape = shapesworkingANPR,
+#		  fill = "red") +
   coord_sf(xlim = xbounds, 
            ylim = ybounds,
            expand = FALSE)+

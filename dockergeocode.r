@@ -193,13 +193,13 @@ addCity <- function(street, details=FALSE){
 #save(streetsAllowedOSM, file="/tmp/wmleuv/streetsAllowedOSM.Rdata")
 #SAVED 						^^^
 
-anprNotWorkingOSM <- anprNotWorking%>% 
-	map(addCity,details=TRUE) %>%
-	map(geocode_OSM, details=TRUE)
-
+#anprNotWorkingOSM <- anprNotWorking%>% 
+#	map(addCity,details=TRUE) %>%
+#	map(geocode_OSM, details=TRUE)
+#
 # Saving due to local cache policy of nominatim.
-save(anprNotWorkingOSM, file="/tmp/wmleuv/anprNotWorkingOSM.Rdata")
-#SAVED 						^^^
+#save(anprNotWorkingOSM, file="/tmp/wmleuv/anprNotWorkingOSM.Rdata")
+##SAVED 						^^^
 
 # Single case example first mapping!
 #gbn<-geocode_OSM("Bondgenotenlaan, Leuven, Belgium",details=TRUE)
@@ -208,3 +208,38 @@ save(anprNotWorkingOSM, file="/tmp/wmleuv/anprNotWorkingOSM.Rdata")
 #	opq_string() %>%
 #	osmdata_sf()
 #print(sfdata)
+load("/tmp/wmleuv/streetsAllowedOSM.Rdata")
+load("/tmp/wmleuv/anprNotWorkingOSM.Rdata")
+
+
+getIds <- function(osmgcdetails){
+	osmgcdetails$osm_id
+}
+
+
+sfify <- function(ids){
+	result <- opq_osm_id(id = ids, type = "way")%>%
+		opq_string() %>%
+		osmdata_sf()
+}
+
+
+aStreetIds <- streetsAllowedOSM%>% 
+	map(getIds)
+
+print(aStreetIds)
+
+save(aStreetIds, file="/tmp/wmleuv/aStreetIds.Rdata")
+
+sfAStreets <- aStreetIds%>%
+	map(sfify)
+
+print(sfAStreets)
+save(sfAStreets, file="/tmp/wmleuv/sfAStreets.Rdata")
+
+# It's only a point lookup so rather geocode_OSM?
+#sfANPRNW <- anprNotWorkingOSM %>%
+#	map(sfify)
+
+#print(sfANPRNW)
+#save(sfANPRNW, file="/tmp/wmleuv/sfANPRNW.Rdata")

@@ -6,6 +6,9 @@ library(purrr)
 #library(tmaptools)
 load("/tmp/wmleuv/streets.Rdata") # streets
 load("/tmp/wmleuv/smallstreets.Rdata") # smallStreets
+#load("/tmp/wmleuv/allstreets.Rdata") # smallStreets
+# Loading this large object (150MB) results in killing the process in docker
+load("/tmp/wmleuv/pedStreets.Rdata") # pedStreets
 load("/tmp/wmleuv/dijle.Rdata")
 load("/tmp/wmleuv/streetsAllowedOSM.Rdata")
 load("/tmp/wmleuv/anprNotWorkingOSM.Rdata") # anprNotWorkingOSM
@@ -49,33 +52,35 @@ aStreetIds <- unlist(aStreetIds)
 
 hlStreets1 <- streets$osm_lines [which (streets$osm_lines$name %in% streetsAllowed), ]
 hlStreets2 <- smallStreets$osm_lines [which (smallStreets$osm_lines$name %in% streetsAllowed), ]
+hlStreets3 <- pedStreets$osm_lines [which (pedStreets$osm_lines$name %in% streetsAllowed), ]
 
+#allHlStreets <- allStreets$osm_lines [which (allStreets$osm_lines$name %in% streetsAllowed), ]
 
 #anprNotWorkingOSM <- unlist(anprNotWorkingOSM, recursive=FALSE)
 print(length(anprNotWorkingOSM))
 
 getXs <- function(OSMobj){
 	#print(OSMobj)
-	result <- OSMobj$coords["x"]
+	result <- OSMobj$coords[["x"]]
 	print(result)
 }
 getYs <- function(OSMobj){
-	result <- OSMobj$coords["y"]
+	result <- OSMobj$coords[["y"]]
 }
 
 # List of list stuff, figure it out
 # https://swcarpentry.github.io/r-novice-inflammation/13-supp-data-structures/
 NWAlong = map(anprNotWorkingOSM, getXs)
 NWAlat = map(anprNotWorkingOSM, getYs)
-print(unlist(NWAlong))
-print(typeof(NWAlong))
-print(typeof(NWAlong[[1]]))
+print(NWAlong)
 
-notWorkingANPR <- data.frame(longitude = NWAlong  ,latitude = NWAlat)
-sfNotWorkingANPR <- st_as_sf(notWorkingANPR, coords = c("x", "y"), crs = 4326, agr = "constant")
+print(NWAlat)
 
-xoffset = c(-0.02, 0.03)
-yoffset = c(0.01, 0.00)
+notWorkingANPR <- data.frame(longitude = unlist(NWAlong), latitude = unlist(NWAlat))
+sfNotWorkingANPR <- st_as_sf(notWorkingANPR, coords = c("longitude", "latitude"), crs = 4326, agr = "constant")
+
+xoffset = c(0.04, -0.04)
+yoffset = c(0.04, -0.05)
 
 xbounds = leuvCoord[1,1:2] + xoffset
 ybounds = leuvCoord[2,1:2] + yoffset
@@ -94,7 +99,7 @@ print(ybounds)
 #print(sfAStreets)
 
 #print(hlStreets1)
-print(hlStreets2[,1:2]$name)
+#print(hlStreets2[,1:2]$name)
 
 getLines <- function(osmdataObj){
 	osmdataObj$osm_lines
@@ -111,14 +116,23 @@ toSFDF <- function(collist){
 #SFDFALines <- toSFDF(sfALines)
 #print(SFDFALines)
 
-
 ggplot() +
+  # geom_sf(data = allStreets$osm_lines,
+  #         inherit.aes = FALSE,
+  #         color = "white",
+  #         size = .4,
+  #         alpha = .8) +
   geom_sf(data = streets$osm_lines,
           inherit.aes = FALSE,
           color = "white",
           size = .4,
           alpha = .8) +
   geom_sf(data = smallStreets$osm_lines,
+		  inherit.aes = FALSE,
+		  color = "white",
+		  size = .4,
+		  alpha = .6)+
+  geom_sf(data = pedStreets$osm_lines,
 		  inherit.aes = FALSE,
 		  color = "white",
 		  size = .4,
@@ -133,6 +147,10 @@ ggplot() +
   #         color = "red",
   #         size = .2,
   #         alpha = .5) +
+  # geom_sf(data = allHlStreets,
+  #         color = "red",
+  #         size = .4,
+  #         alpha = .8) +
   geom_sf(data = hlStreets1,
           color = "red",
           size = .4,
@@ -142,12 +160,17 @@ ggplot() +
 		  color = "red",
 		  size = .4,
 		  alpha = .6)+
+  geom_sf(data = hlStreets3,
+		  inherit.aes = FALSE,
+		  color = "red",
+		  size = .4,
+		  alpha = .6)+
   geom_sf(data = sfNotWorkingANPR,
-		  size = 4, 
-		  shape = 9,
-		  fill = "darkred") +
+		  size = 3, 
+		  shape = 21,
+		  fill = "darkgreen") +
   geom_sf(data = sfworkingANPR,
-		  size = 4, 
+		  size = 5, 
 		  shape = shapesworkingANPR,
 		  fill = "darkred") +
   coord_sf(xlim = xbounds, 

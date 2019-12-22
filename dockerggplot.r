@@ -16,6 +16,13 @@ load("/tmp/wmleuv/sfAStreets.Rdata")
 load("/tmp/wmleuv/aStreetIds.Rdata") # aStreetIds
 load("/tmp/wmleuv/streetsAllowed.Rdata") # streetsAllowed
 load("/tmp/wmleuv/anprNotWorking.Rdata") # anprNotWorking
+load("/tmp/wmleuv/sunders.Rdata") # anprNotWorking
+
+# sunders <- getbb("Leuven Belgium")%>%
+#      opq()%>%
+#      add_osm_feature(key = "man_made", value="surveillance")%>%
+#      osmdata_sf()
+# save(sunders, file= "/Users/dietercastel/git/wmleuv/sunders.Rdata")
 
 
 #hhstr<-sf::st_read("/tmp/wmleuv/hhstr.osm", layer = 'points')
@@ -34,6 +41,7 @@ load("/tmp/wmleuv/leuvCoord.Rdata")
 
 #gbn<-geocode_OSM("Bondgenotenlaan 34, Leuven, Belgium")
 #print(gbn)
+
 
 
 aStreetIds <- unlist(aStreetIds)
@@ -78,6 +86,9 @@ print(NWAlat)
 
 notWorkingANPR <- data.frame(longitude = unlist(NWAlong), latitude = unlist(NWAlat))
 sfNotWorkingANPR <- st_as_sf(notWorkingANPR, coords = c("longitude", "latitude"), crs = 4326, agr = "constant")
+
+print(sunders$osm_points)
+print(sfNotWorkingANPR)
 
 xoffset = c(0.04, -0.04)
 yoffset = c(0.04, -0.05)
@@ -173,6 +184,11 @@ ggplot() +
 		  size = 5, 
 		  shape = shapesworkingANPR,
 		  fill = "darkred") +
+  geom_sf(data = sunders$osm_points,
+		  inherit.aes =FALSE,
+		  color = "orange",
+		  size = 2, 
+		  shape = 3) +
   coord_sf(xlim = xbounds, 
            ylim = ybounds,
            expand = FALSE)+

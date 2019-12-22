@@ -8,9 +8,13 @@ load("/tmp/wmleuv/streets.Rdata") # streets
 load("/tmp/wmleuv/smallstreets.Rdata") # smallStreets
 load("/tmp/wmleuv/dijle.Rdata")
 load("/tmp/wmleuv/streetsAllowedOSM.Rdata")
-load("/tmp/wmleuv/anprNotWorkingOSM.Rdata")
+load("/tmp/wmleuv/anprNotWorkingOSM.Rdata") # anprNotWorkingOSM
 load("/tmp/wmleuv/sfAStreets.Rdata")
 load("/tmp/wmleuv/aStreetIds.Rdata") # aStreetIds
+load("/tmp/wmleuv/streetsAllowed.Rdata") # streetsAllowed
+load("/tmp/wmleuv/anprNotWorking.Rdata") # anprNotWorking
+
+
 #hhstr<-sf::st_read("/tmp/wmleuv/hhstr.osm", layer = 'points')
 leuvCoord <-getbb("Leuven Belgium")
 #			x		y
@@ -21,34 +25,60 @@ leuvCoord <-getbb("Leuven Belgium")
 #print(leuvCoord)
 #save(leuvCoord, file="/tmp/wmleuv/leuvCoord.Rdata")
 load("/tmp/wmleuv/leuvCoord.Rdata")
-print(streets)
-print(smallStreets$osm_lines["osm_id"])
-print(streets$osm_lines["osm_id"])
+#print(streets)
+#print(smallStreets$osm_lines["osm_id"])
+#print(streets$osm_lines["osm_id"])
 
 #gbn<-geocode_OSM("Bondgenotenlaan 34, Leuven, Belgium")
 #print(gbn)
 
+
 aStreetIds <- unlist(aStreetIds)
 
-print(aStreetIds)
+# print(streetsAllowedOSM)
+# print(length(streetsAllowedOSM))
+# print(aStreetIds)
+# print(length(aStreetIds))
 
 
 #print(streets)
 #print(row.names(streets$osm_lines))
 #hlStreets1 <- streets$osm_lines[aStreetIds, ]
-hlStreets1 <- streets$osm_lines [which (streets$osm_lines$osm_id  %in% aStreetIds), ]
-hlStreets2 <- smallStreets$osm_lines [which (streets$osm_lines$osm_id  %in% aStreetIds), ]
+#hlStreets1 <- streets$osm_lines [which (streets$osm_lines$osm_id %in% aStreetIds), ]
+#hlStreets2 <- smallStreets$osm_lines [which (smallStreets$osm_lines$osm_id %in% aStreetIds), ]
 
-print(hlStreets1)
-print(hlStreets2)
+hlStreets1 <- streets$osm_lines [which (streets$osm_lines$name %in% streetsAllowed), ]
+hlStreets2 <- smallStreets$osm_lines [which (smallStreets$osm_lines$name %in% streetsAllowed), ]
+
+
+#anprNotWorkingOSM <- unlist(anprNotWorkingOSM, recursive=FALSE)
+print(length(anprNotWorkingOSM))
+
+getXs <- function(OSMobj){
+	#print(OSMobj)
+	result <- OSMobj$coords["x"]
+	print(result)
+}
+getYs <- function(OSMobj){
+	result <- OSMobj$coords["y"]
+}
+
+# List of list stuff, figure it out
+# https://swcarpentry.github.io/r-novice-inflammation/13-supp-data-structures/
+NWAlong = map(anprNotWorkingOSM, getXs)
+NWAlat = map(anprNotWorkingOSM, getYs)
+print(unlist(NWAlong))
+print(typeof(NWAlong))
+print(typeof(NWAlong[[1]]))
+
+notWorkingANPR <- data.frame(longitude = NWAlong  ,latitude = NWAlat)
+sfNotWorkingANPR <- st_as_sf(notWorkingANPR, coords = c("x", "y"), crs = 4326, agr = "constant")
 
 xoffset = c(-0.02, 0.03)
 yoffset = c(0.01, 0.00)
 
 xbounds = leuvCoord[1,1:2] + xoffset
 ybounds = leuvCoord[2,1:2] + yoffset
-
-print("test")
 
 # Only three working ones:
 # - Geldkoe-Martenlarenplein 50.88057, 4.71487
@@ -62,6 +92,9 @@ sfworkingANPR <- st_as_sf(workingANPR, coords = c("longitude", "latitude"), crs 
 print(xbounds)
 print(ybounds)
 #print(sfAStreets)
+
+#print(hlStreets1)
+print(hlStreets2[,1:2]$name)
 
 getLines <- function(osmdataObj){
 	osmdataObj$osm_lines
@@ -100,10 +133,6 @@ ggplot() +
   #         color = "red",
   #         size = .2,
   #         alpha = .5) +
-  geom_sf(data = sfworkingANPR,
-		  size = 4, 
-		  shape = shapesworkingANPR,
-		  fill = "darkred") +
   geom_sf(data = hlStreets1,
           color = "red",
           size = .4,
@@ -113,6 +142,14 @@ ggplot() +
 		  color = "red",
 		  size = .4,
 		  alpha = .6)+
+  geom_sf(data = sfNotWorkingANPR,
+		  size = 4, 
+		  shape = 9,
+		  fill = "darkred") +
+  geom_sf(data = sfworkingANPR,
+		  size = 4, 
+		  shape = shapesworkingANPR,
+		  fill = "darkred") +
   coord_sf(xlim = xbounds, 
            ylim = ybounds,
            expand = FALSE)+

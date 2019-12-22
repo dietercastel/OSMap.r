@@ -70,6 +70,19 @@ anprNotWorking = c(
 streetsAllowed = c( 
 
 #				"perrons De Lijn",
+				"Leuven station perron 1",
+				"Leuven station perron 2",
+				"Leuven station perron 3",
+				"Leuven station perron 4",
+				"Leuven station perron 5",
+				"Leuven station perron 6",
+				"Leuven station perron 7",
+				"Leuven station perron 8",
+				"Leuven station perron 9",
+				"Leuven station perron 10",
+				"Leuven station perron 11",
+				"Leuven station perron 12",
+				"Leuven station perron 13",
 
 				"Augustijnenstraat",
 
@@ -177,7 +190,9 @@ streetsAllowed = c(
 			  )
 
 print(anprNotWorking)
+save(anprNotWorking,file="/tmp/wmleuv/anprNotWorking.Rdata")
 print(streetsAllowed)
+save(streetsAllowed,file="/tmp/wmleuv/streetsAllowed.Rdata")
 
 addCity <- function(street, details=FALSE){
   if(details == TRUE){
@@ -208,8 +223,8 @@ addCity <- function(street, details=FALSE){
 #	opq_string() %>%
 #	osmdata_sf()
 #print(sfdata)
-load("/tmp/wmleuv/streetsAllowedOSM.Rdata")
-load("/tmp/wmleuv/anprNotWorkingOSM.Rdata")
+#load("/tmp/wmleuv/streetsAllowedOSM.Rdata")
+#load("/tmp/wmleuv/anprNotWorkingOSM.Rdata")
 
 
 getIds <- function(osmgcdetails){
@@ -227,15 +242,15 @@ sfify <- function(ids){
 aStreetIds <- streetsAllowedOSM%>% 
 	map(getIds)
 
-print(aStreetIds)
+#print(aStreetIds)
 
-save(aStreetIds, file="/tmp/wmleuv/aStreetIds.Rdata")
+#save(aStreetIds, file="/tmp/wmleuv/aStreetIds.Rdata")
 
 sfAStreets <- aStreetIds%>%
 	map(sfify)
 
-print(sfAStreets)
-save(sfAStreets, file="/tmp/wmleuv/sfAStreets.Rdata")
+#print(sfAStreets)
+#save(sfAStreets, file="/tmp/wmleuv/sfAStreets.Rdata")
 
 # It's only a point lookup so rather geocode_OSM?
 #sfANPRNW <- anprNotWorkingOSM %>%

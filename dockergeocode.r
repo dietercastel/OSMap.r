@@ -190,10 +190,10 @@ streetsAllowed = c(
 				"Zeelstraat"
 			  )
 
-print(anprNotWorking)
-save(anprNotWorking,file="/tmp/wmleuv/anprNotWorking.Rdata")
-print(streetsAllowed)
-save(streetsAllowed,file="/tmp/wmleuv/streetsAllowed.Rdata")
+#print(anprNotWorking)
+#save(anprNotWorking,file="/tmp/wmleuv/anprNotWorking.Rdata")
+#print(streetsAllowed)
+#save(streetsAllowed,file="/tmp/wmleuv/streetsAllowed.Rdata")
 
 addCity <- function(street, details=FALSE){
   if(details == TRUE){
@@ -213,8 +213,71 @@ streets2013 = c(
 				"Naamsestraat"
 )
 
-save(streets2005, file="/tmp/wmleuv/streets2005.Rdata")
-save(streets2013, file="/tmp/wmleuv/streets2013.Rdata")
+#save(streets2005, file="/tmp/wmleuv/streets2005.Rdata")
+#save(streets2013, file="/tmp/wmleuv/streets2013.Rdata")
+
+vgz1 = c(
+"Boekhandelstraat",
+"Brusselsestraat ", # van Franz Tielemanslaan tot Grote Markt
+"Collegeberg",
+"Diestsestraat", # tussen Margarethaplein en nrs. 188/209 en tussen de Vanden Tymplestraat en de ring
+"Drie-Engelenberg",
+"Eikstraat",
+"Grote Markt",
+"Hallengang",
+"Hanengang ",
+"Hogeschoolplein", # nrs. 5-11
+"Jodenstraat",
+"Jozef Vounckplein",
+"Kiekenstraat",
+"Kortestraat",
+"Krakenstraat",
+"Kroegberg",
+"Leopold Vanderkelenstraat",
+"Liergang",
+"Mechelsestraat", # tussen de Vismarkt en de Brusselsestraat
+"Muntstraat",
+"Naamsestraat", # tussen de Grote Markt en de Lakenweversstraat 
+"Oude Markt",
+"Parijsstraat", # tussen de Brusselsestraat en de Sint-Barbarastraat
+"Pensstraat",
+"Predikherenstraat",
+"Puttegang",
+"Rattemanspoort",
+"'s-Meiersstraat",
+"Savoyestraat",
+"Sint-Maartenstraat", # tussen de Diestsestraat en parking Sint-Maartensdal, nrs. 1-10
+"Standonckstraat",
+"Tiensestraat", # tussen het Rector De Somerplein en de Muntstraat 
+"Vaartstraat", # tussen de Diestsestraat en parking Gerechtsgebouw, nr. 7 
+"Vital Decosterstraat", # tussen de Bondgenotenlaan en het Ladeuzeplein
+"Wandelingstraat",
+"Zeelstraat"
+)
+
+vgz2 = c(
+"Alfons Smetsplein",
+"Augustijnenstraat",
+"Bogaardenstraat", # tussen de Jan Stasstraat en de Koning Leopold I-straat
+"Bondgenotenlaan", # tussen de Vital Decosterstraat en het Rector De Somerplein
+"Busleidengang",
+"Dirk Boutslaan", # tussen de Franz Tielemanslaan en het Mathieu de Layensplein 
+"Herbert Hooverplein", # de zijde met nrs. 1-16
+"Jan Cobbaertplein",
+"Jan Stasstraat",
+"Margarethaplein",
+"Mathieu de Layensplein",
+"Mechelsestraat", # tussen de Lei en de Vismarkt
+"Monseigneur Ladeuzeplein",
+"Parijsstraat", # tussen de Minderbroedersstraat en het Pater Damiaanplein
+"Rector De Somerplein",
+"Schrijnmakersstraat",
+"Tiensestraat", # tussen Muntstraat en Charles Deberiotstraat
+"Vissersstraat"
+)
+
+save(vgz1, file="/tmp/wmleuv/vgz1.Rdata")
+save(vgz2, file="/tmp/wmleuv/vgz2.Rdata")
 
 #streetsAllowedOSM <- streetsAllowed %>% 
 #	map(addCity,details=TRUE) %>%

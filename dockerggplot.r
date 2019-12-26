@@ -2,6 +2,12 @@ library(tidyverse)
 library(osmdata)
 library(sf)
 library(purrr)
+# install.packages("animation") # required in that docker container
+#library(animation) other file
+# install.packages("ggimage") # required in that docker container
+#NOPE install.packages("OpenSteetMap") # required in that docker container
+#NOPE library(OpenStreetMap)
+library(ggimage)
 #library(tmap)
 #library(tmaptools)
 load("/tmp/wmleuv/streets.Rdata") # streets
@@ -10,13 +16,30 @@ load("/tmp/wmleuv/smallstreets.Rdata") # smallStreets
 # Loading this large object (150MB) results in killing the process in docker
 load("/tmp/wmleuv/pedStreets.Rdata") # pedStreets
 load("/tmp/wmleuv/dijle.Rdata")
-load("/tmp/wmleuv/streetsAllowedOSM.Rdata")
+#load("/tmp/wmleuv/streetsAllowedOSM.Rdata")
 load("/tmp/wmleuv/anprNotWorkingOSM.Rdata") # anprNotWorkingOSM
 load("/tmp/wmleuv/sfAStreets.Rdata")
 load("/tmp/wmleuv/aStreetIds.Rdata") # aStreetIds
-load("/tmp/wmleuv/streetsAllowed.Rdata") # streetsAllowed
 load("/tmp/wmleuv/anprNotWorking.Rdata") # anprNotWorking
 load("/tmp/wmleuv/sunders.Rdata") # anprNotWorking
+
+load("/tmp/wmleuv/streetsAllowed.Rdata") # streetsAllowed
+load("/tmp/wmleuv/streets2005.Rdata") # streetsAllowed
+load("/tmp/wmleuv/streets2013.Rdata") # streetsAllowed
+
+#streetsAllowed <- streets2005
+#streetsAllowed <- streets2013
+
+source(file="/tmp/wmleuv/apacheColors.r")
+print(apacheColors["error"])
+
+
+streetSize <- .5
+streetColor <- apacheColors["textGrey"]
+hlStreetSize <- 1
+hlColor <- apacheColors["error"]
+riverColor <- apacheColors["brandDarkest"]
+riverSize <- .5
 
 # sunders <- getbb("Leuven Belgium")%>%
 #      opq()%>%
@@ -61,11 +84,15 @@ aStreetIds <- unlist(aStreetIds)
 hlStreets1 <- streets$osm_lines [which (streets$osm_lines$name %in% streetsAllowed), ]
 hlStreets2 <- smallStreets$osm_lines [which (smallStreets$osm_lines$name %in% streetsAllowed), ]
 hlStreets3 <- pedStreets$osm_lines [which (pedStreets$osm_lines$name %in% streetsAllowed), ]
+hlStreetsPoly <- pedStreets$osm_polygons [which (pedStreets$osm_polygons$name %in% streetsAllowed), ]
+#print(pedStreets$osm_polygons)
+print(streetsAllowed)
+print(hlStreetsPoly)
 
 #allHlStreets <- allStreets$osm_lines [which (allStreets$osm_lines$name %in% streetsAllowed), ]
 
 #anprNotWorkingOSM <- unlist(anprNotWorkingOSM, recursive=FALSE)
-print(length(anprNotWorkingOSM))
+#print(length(anprNotWorkingOSM))
 
 getXs <- function(OSMobj){
 	#print(OSMobj)
@@ -80,15 +107,15 @@ getYs <- function(OSMobj){
 # https://swcarpentry.github.io/r-novice-inflammation/13-supp-data-structures/
 NWAlong = map(anprNotWorkingOSM, getXs)
 NWAlat = map(anprNotWorkingOSM, getYs)
-print(NWAlong)
+#print(NWAlong)
 
-print(NWAlat)
+#print(NWAlat)
 
 notWorkingANPR <- data.frame(longitude = unlist(NWAlong), latitude = unlist(NWAlat))
 sfNotWorkingANPR <- st_as_sf(notWorkingANPR, coords = c("longitude", "latitude"), crs = 4326, agr = "constant")
 
-print(sunders$osm_points)
-print(sfNotWorkingANPR)
+#print(sunders$osm_points)
+#print(sfNotWorkingANPR)
 
 xoffset = c(0.04, -0.04)
 yoffset = c(0.04, -0.05)
@@ -135,66 +162,71 @@ ggplot() +
   #         alpha = .8) +
   geom_sf(data = streets$osm_lines,
           inherit.aes = FALSE,
-          color = "white",
-          size = .4,
+          color = apacheColors["textGrey"],
+          size = streetSize,
           alpha = .8) +
   geom_sf(data = smallStreets$osm_lines,
 		  inherit.aes = FALSE,
-		  color = "white",
-		  size = .4,
+		  color = streetColor,
+		  size = streetSize,
 		  alpha = .6)+
   geom_sf(data = pedStreets$osm_lines,
 		  inherit.aes = FALSE,
-		  color = "white",
-		  size = .4,
+		  color = streetColor,
+		  size = streetSize,
 		  alpha = .6)+
   geom_sf(data = dijle$osm_lines,
           inherit.aes = FALSE,
-          color = "steelblue",
-          size = .2,
+          color = riverColor,
+          size = riverSize,
           alpha = .5) +
   # geom_sf(data = hhstr$osm_lines,
   #         inherit.aes = FALSE,
-  #         color = "red",
+  #         color = "error",
   #         size = .2,
   #         alpha = .5) +
   # geom_sf(data = allHlStreets,
-  #         color = "red",
+  #         color = "error",
   #         size = .4,
   #         alpha = .8) +
   geom_sf(data = hlStreets1,
-          color = "red",
-          size = .4,
+          color = hlColor,
+          size = hlStreetSize,
           alpha = .8) +
   geom_sf(data = hlStreets2,
 		  inherit.aes = FALSE,
-		  color = "red",
-		  size = .4,
+		  color = hlColor,
+		  size = hlStreetSize,
 		  alpha = .6)+
   geom_sf(data = hlStreets3,
 		  inherit.aes = FALSE,
-		  color = "red",
-		  size = .4,
+		  color = hlColor,
+		  size = hlStreetSize,
 		  alpha = .6)+
-  geom_sf(data = sfNotWorkingANPR,
-		  size = 3, 
-		  shape = 21,
-		  fill = "darkgreen") +
-  geom_sf(data = sfworkingANPR,
-		  size = 5, 
-		  shape = shapesworkingANPR,
-		  fill = "darkred") +
-  geom_sf(data = sunders$osm_points,
-		  inherit.aes =FALSE,
-		  color = "orange",
-		  size = 2, 
-		  shape = 3) +
+  geom_sf(data = hlStreetsPoly,
+		  inherit.aes = FALSE,
+		  fill = hlColor,
+		  size = 0,
+		  alpha = 1)+
+  # geom_sf(data = sfNotWorkingANPR,
+	# 	  size = 3, 
+	# 	  shape = 21,
+	# 	  fill = apacheColors["success"]) +
+  # geom_sf(data = sfworkingANPR,
+	# 	  size = 5, 
+	# 	  shape = shapesworkingANPR,
+	# 	  fill = apacheColors["error"]) +
+  # geom_sf(data = sunders$osm_points,
+	# 	  inherit.aes =FALSE,
+	# 	  color = apacheColors["notice"],
+	# 	  size = 2, 
+	# 	  shape = 20) +
   coord_sf(xlim = xbounds, 
            ylim = ybounds,
            expand = FALSE)+
   theme_void()+
   theme(
-    plot.background = element_rect(fill = "#282828")
+    plot.background = element_rect(fill = apacheColors["brandLight"])
   )
 
 ggsave("/tmp/wmleuv/map.png", width = 12, height = 12)

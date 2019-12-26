@@ -70,6 +70,7 @@ anprNotWorking = c(
 streetsAllowed = c( 
 
 #				"perrons De Lijn",
+				"Oude Markt", # Ha! #policefail! They 'forgot' this one!
 				"Leuven station perron 1",
 				"Leuven station perron 2",
 				"Leuven station perron 3",
@@ -199,6 +200,21 @@ addCity <- function(street, details=FALSE){
     paste(street, ", Leuven, Belgium")
   }
 }
+streets2005 = c( 
+				"Oude Markt", # Ha! #policefail! They 'forgot' this one!
+				"Mechelsestraat"
+				)
+streets2013 = c(
+				"Oude Markt", # Ha! #policefail! They 'forgot' this one!
+				"Diestsestraat",
+				"Mechelsestraat",
+				"Tiensestraat",
+				"Rector De Somerplein",
+				"Naamsestraat"
+)
+
+save(streets2005, file="/tmp/wmleuv/streets2005.Rdata")
+save(streets2013, file="/tmp/wmleuv/streets2013.Rdata")
 
 #streetsAllowedOSM <- streetsAllowed %>% 
 #	map(addCity,details=TRUE) %>%
@@ -227,27 +243,27 @@ addCity <- function(street, details=FALSE){
 #load("/tmp/wmleuv/anprNotWorkingOSM.Rdata")
 
 
-getIds <- function(osmgcdetails){
-	osmgcdetails$osm_id
-}
+# getIds <- function(osmgcdetails){
+# 	osmgcdetails$osm_id
+# }
 
 
-sfify <- function(ids){
-	result <- opq_osm_id(id = ids, type = "way")%>%
-		opq_string() %>%
-		osmdata_sf()
-}
+# sfify <- function(ids){
+# 	result <- opq_osm_id(id = ids, type = "way")%>%
+# 		opq_string() %>%
+# 		osmdata_sf()
+# }
 
 
-aStreetIds <- streetsAllowedOSM%>% 
-	map(getIds)
+# aStreetIds <- streetsAllowedOSM%>% 
+# 	map(getIds)
 
 #print(aStreetIds)
 
 #save(aStreetIds, file="/tmp/wmleuv/aStreetIds.Rdata")
 
-sfAStreets <- aStreetIds%>%
-	map(sfify)
+# sfAStreets <- aStreetIds%>%
+# 	map(sfify)
 
 #print(sfAStreets)
 #save(sfAStreets, file="/tmp/wmleuv/sfAStreets.Rdata")

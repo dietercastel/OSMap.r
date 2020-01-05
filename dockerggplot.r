@@ -2,11 +2,7 @@ library(tidyverse)
 library(osmdata)
 library(sf)
 library(purrr)
-# install.packages("animation") # required in that docker container
-#library(animation) other file
 # install.packages("ggimage") # required in that docker container
-#NOPE install.packages("OpenSteetMap") # required in that docker container
-#NOPE library(OpenStreetMap)
 library(ggimage)
 #library(tmap)
 #library(tmaptools)

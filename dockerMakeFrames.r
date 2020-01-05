@@ -1,17 +1,14 @@
 library(tidyverse)
 library(osmdata)
 library(sf)
-library(purrr)
-library(ggimage)
+#library(purrr) # problems with map function?
+#library(ggimage) solve with PIL
 load("/tmp/wmleuv/streets.Rdata") # streets
 load("/tmp/wmleuv/smallstreets.Rdata") # smallStreets
 load("/tmp/wmleuv/pedStreets.Rdata") # pedStreets
-load("/tmp/wmleuv/dijle.Rdata")
-load("/tmp/wmleuv/anprNotWorkingOSM.Rdata") # anprNotWorkingOSM
+load("/tmp/wmleuv/dijle.Rdata") # dijle
 load("/tmp/wmleuv/sfAStreets.Rdata")
 load("/tmp/wmleuv/aStreetIds.Rdata") # aStreetIds
-load("/tmp/wmleuv/anprNotWorking.Rdata") # anprNotWorking
-load("/tmp/wmleuv/sunders.Rdata") # anprNotWorking
 
 
 
@@ -24,29 +21,23 @@ getYs <- function(OSMobj){
 	result <- OSMobj$coords[["y"]]
 }
 
-NWAlong = map(anprNotWorkingOSM, getXs)
-NWAlat = map(anprNotWorkingOSM, getYs)
-
-notWorkingANPR <- data.frame(longitude = unlist(NWAlong), latitude = unlist(NWAlat))
-sfNotWorkingANPR <- st_as_sf(notWorkingANPR, coords = c("longitude", "latitude"), crs = 4326, agr = "constant")
-
 xoffset = c(0.04, -0.04)
-yoffset = c(0.04, -0.05)
+yoffset = c(0.04, -0.053)
+logo <- data.frame(x = c(4.7177),
+				   y = c(50.8864),
+				   image = c("/tmp/wmleuv/apacheLokaal1.png"))
 
+print(logo)
 load("/tmp/wmleuv/leuvCoord.Rdata")
 leuvCoord <-getbb("Leuven Belgium")
 xbounds = leuvCoord[1,1:2] + xoffset
 ybounds = leuvCoord[2,1:2] + yoffset
 
-workingANPR <- data.frame(longitude = c(4.71487,4.722256,4.725876), latitude = c(50.88055,50.868489,50.868851))
-shapesworkingANPR <- c(24,24,25)
-sfworkingANPR <- st_as_sf(workingANPR, coords = c("longitude", "latitude"), crs = 4326, agr = "constant")
-
 print(xbounds)
 print(ybounds)
 
 source(file="/tmp/wmleuv/apacheColors.r")
-print(apacheColors["error"])
+#print(apacheColors["error"])
 streetSize <- .5
 streetColor <- apacheColors["textGrey"]
 hlStreetSize <- 1
@@ -92,7 +83,7 @@ load("/tmp/wmleuv/streets2013.Rdata") # streets2013
 load("/tmp/wmleuv/streetsAllowed.Rdata") # streetsAllowed
 streets2020 <- streetsAllowed
 
-print(streetsAllowed)
+#print(streetsAllowed)
 
 years <- c("2005","2013","2020")
 
@@ -105,7 +96,7 @@ makeFrame <- function(year){
 	hlStreets3 <- pedStreets$osm_lines [which (pedStreets$osm_lines$name %in% streetsAllowed), ]
 	hlStreetsPoly <- pedStreets$osm_polygons [which (pedStreets$osm_polygons$name %in% streetsAllowed), ]
 
-	print(hlStreetsPoly)
+	#print(hlStreetsPoly)
 
 	yearPlot <- basePlot +
 	  geom_sf(data = hlStreets1,
@@ -127,18 +118,23 @@ makeFrame <- function(year){
 			  fill = hlColor,
 			  size = 0,
 			  alpha = 1)+
-	  #ggtitle(paste("Stratenplan Leuven met straten waar gefilmd mag worden(", year, ")"))+
+	  #geom_image(data=logo,
+				 #aes(x,y,image),
+				#inherit.aes = FALSE,
+				#size = 0.04) +
+	  ggtitle(paste("   Stratenplan Leuven met straten waar gefilmd mag worden (", year, ").",sep=""))+
 	  coord_sf(xlim = xbounds, 
 			   ylim = ybounds,
 			   expand = FALSE)+
 	  theme_void()+
 	  theme(
-		plot.background = element_rect(fill = apacheColors["brandLight"])
+		plot.background = element_rect(fill = apacheColors["brandLight"]),
+		plot.title = element_text(size = 18, face = "bold")
 	  )
 
 	ggsave(paste("/tmp/wmleuv/map",year,".png",sep=""), plot=yearPlot, width = 12, height = 12)
 }
 
 #makeFrame(years[1])
-makeFrame(years[2])
-#makeFrame(years[3])
+#makeFrame(years[2])
+makeFrame(years[3])

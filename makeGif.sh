@@ -1,3 +1,3 @@
 #!/bin/bash
 # Requires image magick convert to be installed
-convert -loop 1 -delay 100 map2005.png map2013.png map.png out.gif
+convert -loop 0 -delay 100 logo_map2005.png logo_map2013.png logo_map2020.png hlStreets.gif

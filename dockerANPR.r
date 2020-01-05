@@ -76,7 +76,7 @@ sfNotWorkingANPR <- st_as_sf(notWorkingANPR, coords = c("longitude", "latitude")
 #print(sfNotWorkingANPR)
 
 xoffset = c(0.04, -0.04)
-yoffset = c(0.04, -0.05)
+yoffset = c(0.04, -0.053)
 
 xbounds = leuvCoord[1,1:2] + xoffset
 ybounds = leuvCoord[2,1:2] + yoffset
@@ -167,12 +167,12 @@ ggplot() +
 		  size = 0,
 		  alpha = 1)+
   geom_sf(data = sfNotWorkingANPR,
-		  # size = 5, 
-		  # shape = 24,
-		  size = 3, 
-		  shape = 21,
-		  fill = apacheColors["success"]) +
-		  # fill = apacheColors["error"]) +
+		  size = 5, 
+		  shape = 24,
+		  #size = 3, 
+		  #shape = 21,
+		  #fill = apacheColors["success"]) +
+		  fill = apacheColors["error"]) +
   geom_sf(data = sfworkingANPR,
 		  size = 5, 
 		  shape = shapesworkingANPR,
@@ -185,4 +185,4 @@ ggplot() +
     plot.background = element_rect(fill = apacheColors["brandLight"])
   )
 
-ggsave("/tmp/wmleuv/mapANPRoff.png", width = 12, height = 12)
+ggsave("/tmp/wmleuv/mapANPRon.png", width = 12, height = 10.5)

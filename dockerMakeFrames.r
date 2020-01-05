@@ -35,6 +35,12 @@ ybounds = leuvCoord[2,1:2] + yoffset
 
 print(xbounds)
 print(ybounds)
+#width = xbounds["max"]-xbounds["min"]
+#print(width)
+#height = ybounds["max"]-ybounds["min"]
+#print(height)
+#ratio = height/width
+#print(ratio)
 
 source(file="/tmp/wmleuv/apacheColors.r")
 #print(apacheColors["error"])
@@ -129,12 +135,14 @@ makeFrame <- function(year){
 	  theme_void()+
 	  theme(
 		plot.background = element_rect(fill = apacheColors["brandLight"]),
-		plot.title = element_text(size = 18, face = "bold")
-	  )
+		plot.title = element_text(size = 18, face = "bold"),
+		plot.margin=unit(c(0,0,0,0), "mm")
+	  ) + 
+	  labs(x=NULL, y=NULL)
 
-	ggsave(paste("/tmp/wmleuv/map",year,".png",sep=""), plot=yearPlot, width = 12, height = 12)
+	ggsave(paste("/tmp/wmleuv/map",year,".png",sep=""), plot=yearPlot, width = 12, height=10.5)
 }
 
 #makeFrame(years[1])
-#makeFrame(years[2])
+makeFrame(years[2])
 makeFrame(years[3])

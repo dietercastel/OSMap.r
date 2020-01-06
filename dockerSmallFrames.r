@@ -21,6 +21,8 @@ getYs <- function(OSMobj){
 	result <- OSMobj$coords[["y"]]
 }
 
+
+
 xoffset = c(0.04, -0.04)
 yoffset = c(0.04, -0.053)
 logo <- data.frame(x = c(4.7177),
@@ -30,6 +32,10 @@ logo <- data.frame(x = c(4.7177),
 print(logo)
 load("/tmp/wmleuv/leuvCoord.Rdata")
 leuvCoord <-getbb("Leuven Belgium")
+
+#Latitude, longitude
+#50.88197, 4.69498
+
 xbounds = leuvCoord[1,1:2] + xoffset
 ybounds = leuvCoord[2,1:2] + yoffset
 
@@ -131,7 +137,7 @@ makeFrame <- function(year,bis="",backgroundColor=apacheColors["brandLight"],tit
 				 #aes(x,y,image),
 				#inherit.aes = FALSE,
 				#size = 0.04) +
-	  #ggtitle(titleText)+ /not used atm 
+	  ggtitle(titleText)+
 	  coord_sf(xlim = xbounds, 
 			   ylim = ybounds,
 			   expand = FALSE)+
@@ -139,17 +145,17 @@ makeFrame <- function(year,bis="",backgroundColor=apacheColors["brandLight"],tit
 	  theme(
 		plot.background = element_rect(fill = backgroundColor),
 		plot.title = element_text(size = 18, face = "bold"),
-		#plot.margin=unit(c(0,0,0,0), "mm") # not useful atm
-	  ) 
-	  #labs(x=NULL, y=NULL) #not useful atm
+		plot.margin=unit(c(0,0,0,0), "mm") # doesn't work?
+	  ) + 
+	  labs(x=NULL, y=NULL) # doesn't work?
 
-	ggsave(paste("/tmp/wmleuv/map",year,bis,".png",sep=""), plot=yearPlot, width = 12, height=10.22)
+	ggsave(paste("/tmp/wmleuv/map",year,bis,".png",sep=""), plot=yearPlot, width = 12, height=10.5)
 }
 
-#makeFrame(years[1])
-#makeFrame(years[2])
-makeFrame(years[3])
-makeFrame(years[3],
-	  bis="bis",
-	  backgroundColor=rgb(red = 1, green = 0, blue = 0, alpha = 0.3),
-	  titleText = "Leuven, in het rode gebied zet de politie mobiele camera's in.")
+makeFrame(years[1],bis="small")
+makeFrame(years[2],bis="small")
+#makeFrame(years[3])
+#makeFrame(years[3],
+	  #bis="bis",
+	  #backgroundColor=rgb(red = 1, green = 0, blue = 0, alpha = 0.3),
+	  #titleText = "Leuven, in het rode gebied zet de politie mobiele camera's in.")

@@ -1,3 +1,31 @@
+# Prioriteiten:
+
+DONE 1) Overlay met trasparency rood (heel het grondgebied mobiele camera's)
+DONE 2) tekst:
+Leuven, de rode straten filmt de politie permanent.
+Leuven, in het rode gebied zet de politie mobiele camera's in. 
++ Jaartal
+2) image 1/2 centered, zeker met straatnamen
+4) Oog/camera in't rood cctv.png
+5) Lettertype van Apache, \/ a Leuven
+6) straatnamen
+7) Dijle dikker
+8) Perrons inkleuren
+
+
+Artikel 2
+
+1) Uitsnijding 3 camera's
+2) Straatnamen erbij
+3) tekst:
+Leuven
+3) Oog/camera in't rood cctv.png + Tekst ANPR
+4) Ofwel gele wandelstraten snijden.
+5) Ofwel overlay van 20170920circulatieplandef_0.pdf (het paarse deel)
+
+
+
+
 # Leuven Londen aan de dijle.
 
 Intro:

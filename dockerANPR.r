@@ -185,4 +185,6 @@ ggplot() +
     plot.background = element_rect(fill = apacheColors["brandLight"])
   )
 
-ggsave("/tmp/wmleuv/mapANPRon.png", width = 12, height = 10.5)
+print(sfNotWorkingANPR)
+print(sfworkingANPR)
+ggsave("/tmp/wmleuv/mapANPRon2020.png", width = 12, height = 10.5)

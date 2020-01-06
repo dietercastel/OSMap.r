@@ -1,4 +1,4 @@
-from PIL import Image, ImageFont, ImageDraw
+from PIL import Image, ImageFont, ImageDraw, ImageOps
 import re
 legendColor = "#ce4544"
 streetText = "De lokale politie filmt de rode straten 24/7."
@@ -7,12 +7,16 @@ ANPRText = "Bij elke driehoek staan ANPR-camera's."
 imgNames = ["map2005.png", "map2013.png", "map2020.png","map2020bis.png","mapANPRon2020.png"]
 legendTxts = [streetText, streetText, streetText, overlayText, ANPRText]
 logoName = "apacheLokaal2.png"
+camLogoName = "/Users/dietercastel/Downloads/CCTV_RED.PNG"
 
 logo = Image.open(logoName)
 newLogoSize = (600,600)
 print(logo.size)
 scaledLogo = logo.resize(newLogoSize,Image.ANTIALIAS)
 print(scaledLogo.size)
+camLogo = Image.open(camLogoName).convert("RGBA")
+camLogo = camLogo.resize((225,150),Image.ANTIALIAS) 
+(camW,camH) = camLogo.size
 (lW,lH) = scaledLogo.size
 sigFont = ImageFont.truetype(font="/Users/dietercastel/Downloads/OpenDyslexic-Bold.otf", size=50)
 legendFont = ImageFont.truetype(font="/Users/dietercastel/Downloads/Typesketchbook - NoyhBlack.otf", size=120)
@@ -32,6 +36,7 @@ def addLogo(imgName,legendTxt):
     (w,h) = img.size
     logoX = w - (lW + cW)
     img.paste(scaledLogo, (logoX, 0), scaledLogo)
+    img.paste(camLogo, (logoX+160, lH-yH), camLogo)
     txt = Image.new('RGBA', img.size, (255,255,255,0))
     draw = ImageDraw.Draw(txt)
     draw.text((0,0), legendTxt, font=legendFont, fill=apacheError)

@@ -49,7 +49,7 @@ streetColor <- apacheColors["textGrey"]
 hlStreetSize <- 1
 hlColor <- apacheColors["error"]
 riverColor <- apacheColors["brandDarkest"]
-riverSize <- .5
+riverSize <- .7
 basePlot <-	ggplot() +
 	  # geom_sf(data = allStreets$osm_lines,
 	  #         inherit.aes = FALSE,
@@ -146,10 +146,10 @@ makeFrame <- function(year,bis="",backgroundColor=apacheColors["brandLight"],tit
 	ggsave(paste("/tmp/wmleuv/map",year,bis,".png",sep=""), plot=yearPlot, width = 12, height=10.22)
 }
 
-#makeFrame(years[1])
-#makeFrame(years[2])
-makeFrame(years[3])
-makeFrame(years[3],
-	  bis="bis",
-	  backgroundColor=rgb(red = 1, green = 0, blue = 0, alpha = 0.3),
-	  titleText = "Leuven, in het rode gebied zet de politie mobiele camera's in.")
+makeFrame(years[1])
+makeFrame(years[2])
+#makeFrame(years[3])
+#makeFrame(years[3],
+	  #bis="bis",
+	  #backgroundColor=rgb(red = 1, green = 0, blue = 0, alpha = 0.3),
+	  #titleText = "Leuven, in het rode gebied zet de politie mobiele camera's in.")

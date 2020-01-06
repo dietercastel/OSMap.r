@@ -39,8 +39,20 @@ leuvCoord <-getbb("Leuven Belgium")
 xbounds = leuvCoord[1,1:2] + xoffset
 ybounds = leuvCoord[2,1:2] + yoffset
 
+newXbounds = c(4.697, 4.7068)
+names(newXbounds) = c("min","max")
+newYbounds = c(50.87667, 50.8825)
+names(newYbounds) = c("min","max")
 print(xbounds)
+print("new")
+print(newXbounds)
 print(ybounds)
+print("new")
+print(newYbounds)
+#upper left
+#50.8825, 4.6967
+#bottem right
+#50.87667, 4.70608
 #width = xbounds["max"]-xbounds["min"]
 #print(width)
 #height = ybounds["max"]-ybounds["min"]
@@ -55,7 +67,7 @@ streetColor <- apacheColors["textGrey"]
 hlStreetSize <- 1
 hlColor <- apacheColors["error"]
 riverColor <- apacheColors["brandDarkest"]
-riverSize <- .5
+riverSize <- .7
 basePlot <-	ggplot() +
 	  # geom_sf(data = allStreets$osm_lines,
 	  #         inherit.aes = FALSE,
@@ -98,7 +110,12 @@ streets2020 <- streetsAllowed
 
 years <- c("2005","2013","2020")
 
-makeFrame <- function(year,bis="",backgroundColor=apacheColors["brandLight"],titleText=""){
+makeFrame <- function(year,
+		      bis="",
+		      xbb=xbounds,
+		      ybb=ybounds,
+		      backgroundColor=apacheColors["brandLight"],
+		      titleText=""){
 	if(nchar(titleText)== 0){
 		titleText <- "Leuven, de rode straten filmt de politie permanent."
 	}
@@ -137,23 +154,21 @@ makeFrame <- function(year,bis="",backgroundColor=apacheColors["brandLight"],tit
 				 #aes(x,y,image),
 				#inherit.aes = FALSE,
 				#size = 0.04) +
-	  ggtitle(titleText)+
-	  coord_sf(xlim = xbounds, 
-			   ylim = ybounds,
+	  #ggtitle(titleText)+
+	  coord_sf(xlim = xbb, 
+			   ylim = ybb,
 			   expand = FALSE)+
 	  theme_void()+
 	  theme(
 		plot.background = element_rect(fill = backgroundColor),
 		plot.title = element_text(size = 18, face = "bold"),
-		plot.margin=unit(c(0,0,0,0), "mm") # doesn't work?
-	  ) + 
-	  labs(x=NULL, y=NULL) # doesn't work?
+	  )
 
 	ggsave(paste("/tmp/wmleuv/map",year,bis,".png",sep=""), plot=yearPlot, width = 12, height=10.5)
 }
 
-makeFrame(years[1],bis="small")
-makeFrame(years[2],bis="small")
+makeFrame(years[1],bis="small",xbb=newXbounds,ybb=newYbounds)
+makeFrame(years[2],bis="small",xbb=newXbounds,ybb=newYbounds)
 #makeFrame(years[3])
 #makeFrame(years[3],
 	  #bis="bis",

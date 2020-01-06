@@ -5,11 +5,11 @@ DONE 2) tekst:
 Leuven, de rode straten filmt de politie permanent.
 Leuven, in het rode gebied zet de politie mobiele camera's in. 
 + Jaartal
-2) image 1/2 centered, zeker met straatnamen
+2) image 1,2 centered, zeker met straatnamen
 4) Oog/camera in't rood cctv.png
-5) Lettertype van Apache, \/ a Leuven
+DONE 5) Lettertype van Apache, \/ a Leuven
 6) straatnamen
-7) Dijle dikker
+DONE 7) Dijle dikker
 8) Perrons inkleuren
 
 

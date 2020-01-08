@@ -195,14 +195,15 @@ ggplot() +
 		  fill = apacheColors["error"]) +
   geom_sf(data = sfworkingANPR,
 		  size = 5, 
-		  shape = shapesworkingANPR,
+		  shape = 24,
 		  fill = apacheColors["error"]) +
   coord_sf(xlim = xbounds, 
            ylim = ybounds,
            expand = FALSE)+
   theme_void()+
   theme(
-    plot.background = element_rect(fill = apacheColors["brandLight"])
+    #plot.background = element_rect(fill = apacheColors["brandLight"])
+    plot.background = element_rect(fill = "white")
   )
 
 print(sfNotWorkingANPR)

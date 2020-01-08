@@ -5,6 +5,7 @@ library(sf)
 #library(ggimage) solve with PIL
 load("/tmp/wmleuv/streets.Rdata") # streets
 load("/tmp/wmleuv/smallstreets.Rdata") # smallStreets
+load("/tmp/wmleuv/allstreets.Rdata") # allStreets
 load("/tmp/wmleuv/pedStreets.Rdata") # pedStreets
 load("/tmp/wmleuv/dijle.Rdata") # dijle
 load("/tmp/wmleuv/sfAStreets.Rdata")
@@ -104,7 +105,6 @@ makeFrame <- function(year,bis="",backgroundColor=apacheColors["brandLight"],tit
 	hlStreets2 <- smallStreets$osm_lines [which (smallStreets$osm_lines$name %in% streetsAllowed), ]
 	hlStreets3 <- pedStreets$osm_lines [which (pedStreets$osm_lines$name %in% streetsAllowed), ]
 	hlStreetsPoly <- pedStreets$osm_polygons [which (pedStreets$osm_polygons$name %in% streetsAllowed), ]
-
 	#print(hlStreetsPoly)
 
 	yearPlot <- basePlot +
@@ -126,12 +126,19 @@ makeFrame <- function(year,bis="",backgroundColor=apacheColors["brandLight"],tit
 			  inherit.aes = FALSE,
 			  fill = hlColor,
 			  size = 0,
-			  alpha = 1)+
-	  #geom_image(data=logo,
-				 #aes(x,y,image),
-				#inherit.aes = FALSE,
-				#size = 0.04) +
+			  alpha = 1)
 	  #ggtitle(titleText)+ /not used atm 
+
+	if(year == "2020") {
+		busLocs <- allStreets$osm_polygons [which (allStreets$osm_polygons$highway== "platform"), ]
+		yearPlot <- yearPlot +	  
+			   geom_sf(data = busLocs,
+				  inherit.aes = FALSE,
+				  fill = hlColor,
+				  size = 0,
+				  alpha = 1)
+	} 
+	finPlot <- yearPlot +
 	  coord_sf(xlim = xbounds, 
 			   ylim = ybounds,
 			   expand = FALSE)+
@@ -139,17 +146,15 @@ makeFrame <- function(year,bis="",backgroundColor=apacheColors["brandLight"],tit
 	  theme(
 		plot.background = element_rect(fill = backgroundColor),
 		plot.title = element_text(size = 18, face = "bold"),
-		#plot.margin=unit(c(0,0,0,0), "mm") # not useful atm
 	  ) 
-	  #labs(x=NULL, y=NULL) #not useful atm
 
-	ggsave(paste("/tmp/wmleuv/map",year,bis,".png",sep=""), plot=yearPlot, width = 12, height=10.22)
+	ggsave(paste("/tmp/wmleuv/map",year,bis,".png",sep=""), plot=finPlot, width = 12, height=10.22)
 }
 
-makeFrame(years[1])
-makeFrame(years[2])
-#makeFrame(years[3])
-#makeFrame(years[3],
-	  #bis="bis",
-	  #backgroundColor=rgb(red = 1, green = 0, blue = 0, alpha = 0.3),
-	  #titleText = "Leuven, in het rode gebied zet de politie mobiele camera's in.")
+makeFrame(years[1], backgroundColor="white")
+makeFrame(years[2], backgroundColor="white")
+makeFrame(years[3], backgroundColor="white")
+makeFrame(years[3],
+	  bis="bis",
+	  backgroundColor=rgb(red = 1, green = 0, blue = 0, alpha = 0.3),
+	  titleText = "Leuven, in het rode gebied zet de politie mobiele camera's in.")

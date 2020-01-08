@@ -7,22 +7,22 @@ centerText = "De lokale politie filmt de rode straten in het centrum 24/7."
 overlayText = "De lokale politie zet mobiele camera's in op heel het grondgebied."
 ANPRSmallText = "3 werkende ANPR-camera's aan Leuven station & tiensestwg."
 ANPRText = "Bij elke driehoek staan ANPR-camera's."
-runFlag = [False,
-           False,
-           False,
-           False,
-           False,
-           False,
-           False,
+runFlag = [True,
            True,
-           False]
+           True,
+           True,
+           True,
+           True,
+           True,
+           True,
+           True]
 imgNames = ["trimmed_map2005small.png",
         "trimmed_map2013small.png",
         "trimmed_map2020small.png",
-        "map2005.png",
-        "map2013.png",
-        "map2020.png",
-        "map2020bis.png",
+        "trimmed_map2005.png",
+        "trimmed_map2013.png",
+        "trimmed_map2020.png",
+        "trimmed_map2020bis.png",
         "trimmed_mapANPR2020small.png",
         "trimmed_mapANPR2020.png"]
 legendTxts = [centerText,
@@ -35,7 +35,7 @@ legendTxts = [centerText,
         ANPRSmallText,
         ANPRText]
 logoName = "apacheLokaal2.png"
-camLogoName = "/Users/dietercastel/Downloads/CCTV_RED.PNG"
+camLogoName = "CCTV_RED.png"
 
 logo = Image.open(logoName)
 newLogoSize = (600,600)
@@ -43,6 +43,8 @@ print(logo.size)
 scaledLogo = logo.resize(newLogoSize,Image.ANTIALIAS)
 print(scaledLogo.size)
 camLogo = Image.open(camLogoName).convert("RGBA")
+print(logo.getpixel((0,0)))
+print(camLogo.getpixel((0,0)))
 camLogo = camLogo.resize((225,150),Image.ANTIALIAS) 
 (camW,camH) = camLogo.size
 (lW,lH) = scaledLogo.size
@@ -55,7 +57,8 @@ city = "Leuven"
 (cW,cH) = apacheFont.getsize(city)
 apacheColor = (72,183,201,255)
 apacheError = "#ce4544"
-shadowColor = "#222222"
+shadowColor = "#ffffff"
+#shadowColor = "#222222"
 
 def drawBorder(drawobj, loc, text, font):
     (x,y) = loc 

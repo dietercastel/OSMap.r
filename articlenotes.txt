@@ -10,8 +10,9 @@ DONE 4) Oog/camera in't rood cctv.png
 DONE 5) Lettertype van Apache, \/ a Leuven
 DONE 7) Dijle dikker
 
-6) straatnamen
-8) Perrons inkleuren
+DONE 6) straatnamen via OSM?
+7) doorsch van camera?
+DONE 9) Perrons inkleuren
 
 
 Artikel 2

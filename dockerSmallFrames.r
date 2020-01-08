@@ -10,6 +10,8 @@ load("/tmp/wmleuv/dijle.Rdata") # dijle
 load("/tmp/wmleuv/sfAStreets.Rdata")
 load("/tmp/wmleuv/aStreetIds.Rdata") # aStreetIds
 
+library(png)
+mypng <- readPNG('/tmp/wmleuv/centrum.png')
 
 
 getXs <- function(OSMobj){
@@ -43,11 +45,9 @@ newXbounds = c(4.697, 4.7068)
 names(newXbounds) = c("min","max")
 newYbounds = c(50.87667, 50.8825)
 names(newYbounds) = c("min","max")
-print(xbounds)
-print("new")
+#print(xbounds)
 print(newXbounds)
-print(ybounds)
-print("new")
+#print(ybounds)
 print(newYbounds)
 #upper left
 #50.8825, 4.6967
@@ -64,7 +64,7 @@ source(file="/tmp/wmleuv/apacheColors.r")
 #print(apacheColors["error"])
 streetSize <- .5
 streetColor <- apacheColors["textGrey"]
-hlStreetSize <- 1
+hlStreetSize <- 8
 hlColor <- apacheColors["error"]
 riverColor <- apacheColors["brandDarkest"]
 riverSize <- .7
@@ -131,25 +131,29 @@ makeFrame <- function(year,
 	#print(hlStreetsPoly)
 
 	yearPlot <- basePlot +
+		#newXbounds = c(4.697, 4.7068)
+		#newYbounds = c(50.87667, 50.8825)
+	  annotation_raster(mypng, ymin=50.8825, ymax=50.87667, xmin=4.697, xmax=4.7068)+
 	  geom_sf(data = hlStreets1,
-			  color = hlColor,
+			  color = alpha(hlColor,.7),
 			  size = hlStreetSize,
-			  alpha = .8) +
+			  alpha = .2) +
 	  geom_sf(data = hlStreets2,
 			  inherit.aes = FALSE,
-			  color = hlColor,
+			  color = alpha(hlColor,.7),
+			  #color = hlColor,
 			  size = hlStreetSize,
 			  alpha = .6)+
 	  geom_sf(data = hlStreets3,
 			  inherit.aes = FALSE,
-			  color = hlColor,
+			  color = alpha(hlColor,.7),
+			  #color = hlColor,
 			  size = hlStreetSize,
 			  alpha = .6)+
-	  geom_sf(data = hlStreetsPoly,
-			  inherit.aes = FALSE,
-			  fill = hlColor,
-			  size = 0,
-			  alpha = 1)+
+	  #geom_sf(data = hlStreetsPoly,
+			  #inherit.aes = FALSE,
+			  #fill = alpha(hlColor,.7),
+			  #size = 0)+
 	  #geom_image(data=logo,
 				 #aes(x,y,image),
 				#inherit.aes = FALSE,
@@ -167,9 +171,9 @@ makeFrame <- function(year,
 	ggsave(paste("/tmp/wmleuv/map",year,bis,".png",sep=""), plot=yearPlot, width = 12, height=10.5)
 }
 
-#makeFrame(years[1],bis="small",xbb=newXbounds,ybb=newYbounds)
-#makeFrame(years[2],bis="small",xbb=newXbounds,ybb=newYbounds)
-makeFrame(years[3],bis="small",xbb=newXbounds,ybb=newYbounds)
+makeFrame(years[1],bis="small",xbb=newXbounds,ybb=newYbounds,backgroundColor="white")
+makeFrame(years[2],bis="small",xbb=newXbounds,ybb=newYbounds,backgroundColor="white")
+makeFrame(years[3],bis="small",xbb=newXbounds,ybb=newYbounds,backgroundColor="white")
 #makeFrame(years[3],
 	  #bis="bis",
 	  #backgroundColor=rgb(red = 1, green = 0, blue = 0, alpha = 0.3),

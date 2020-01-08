@@ -96,8 +96,8 @@ names(newXbounds) = c("min","max")
 newYbounds = c(50.866, 50.88394)
 names(newYbounds) = c("min","max")
 
-xbounds <- newXbounds
-ybounds <- newYbounds
+#xbounds <- newXbounds
+#ybounds <- newYbounds
 
 # Only three working ones:
 # - Geldkoe-Martenlarenplein 50.88057, 4.71487
@@ -206,10 +206,11 @@ ggplot() +
            expand = FALSE)+
   theme_void()+
   theme(
-    plot.background = element_rect(fill = apacheColors["brandLight"])
+    #plot.background = element_rect(fill = apacheColors["brandLight"])
+    plot.background = element_rect(fill = "white")
   )
 
 #print(sfNotWorkingANPR)
 #print(sfworkingANPR)
-#ggsave("/tmp/wmleuv/mapANPR2020.png", width = 12, height = 10.5)
-ggsave("/tmp/wmleuv/mapANPR2020small.png", width = 12, height = 10.5)
+ggsave("/tmp/wmleuv/mapANPR2020.png", width = 12, height = 10.5)
+#ggsave("/tmp/wmleuv/mapANPR2020small.png", width = 12, height = 10.5)

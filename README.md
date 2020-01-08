@@ -1,6 +1,9 @@
 # wmleuv
 Security camera visualisation of Leuven.
 
+
+TODO: cleanup, docs, ...
+
 ## Docker
 
 You might want to increase your docker memory & swap file size (in Preferences/Advanced) because R (or my code?) has a crashing tendency when not given enough resources.
@@ -28,15 +31,13 @@ The output is placed inside the current directory.
 
 ## Gif making
 
-In docker container started with `docker.sh`
+Trim the white edges
 
-run in `/tmp/wmleuv`
-`r dockerMakeFrames.r`
+`./trimImages.py imageName`
 
+Next with python 3 and pillow installed run:
+`./addLogo.py`
 
-Next with python and pillow installed run:
+finally with imagemagick convert installed run:
 
-`python3 addLogo.py`
-
-
-finally run
+`./makeGif.sh`

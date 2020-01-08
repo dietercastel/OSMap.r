@@ -25,6 +25,9 @@ load("/tmp/wmleuv/vgz2.Rdata")
 source(file="/tmp/wmleuv/apacheColors.r")
 print(apacheColors["error"])
 
+library(png)
+mypng <- readPNG('/tmp/wmleuv/voetgangerszone.png')
+
 streetSize <- .5
 streetColor <- apacheColors["textGrey"]
 hlStreetSize <- 1
@@ -53,9 +56,10 @@ hlStreets3 <- pedStreets$osm_lines [which (pedStreets$osm_lines$name %in% pedZon
 hlStreetsPoly <- pedStreets$osm_polygons [which (pedStreets$osm_polygons$name %in% pedZone), ]
 
 getXs <- function(OSMobj){
-	#print(OSMobj)
+	#print(OSMobj$query)
 	result <- OSMobj$coords[["x"]]
 	print(result)
+	#print(OSMobj$coords[["y"]])
 }
 getYs <- function(OSMobj){
 	result <- OSMobj$coords[["y"]]
@@ -81,6 +85,19 @@ yoffset = c(0.04, -0.053)
 xbounds = leuvCoord[1,1:2] + xoffset
 ybounds = leuvCoord[2,1:2] + yoffset
 
+#left top
+#50.88394, 4.71002
+#50.866, 4.7366
+
+
+newXbounds = c(4.71002, 4.7366)
+names(newXbounds) = c("min","max")
+newYbounds = c(50.866, 50.88394)
+names(newYbounds) = c("min","max")
+
+#xbounds <- newXbounds
+#ybounds <- newYbounds
+
 # Only three working ones:
 # - Geldkoe-Martenlarenplein 50.88057, 4.71487
 # - Hoegaardsestraat 50.868489, 4.722256
@@ -94,6 +111,7 @@ print(xbounds)
 print(ybounds)
 #print(sfAStreets)
 
+print(streets$osm_polygons)
 #print(hlStreets1)
 #print(hlStreets2[,1:2]$name)
 
@@ -147,25 +165,27 @@ ggplot() +
   #         color = "error",
   #         size = .4,
   #         alpha = .8) +
-  geom_sf(data = hlStreets1,
-          color = hlColor,
-          size = hlStreetSize,
-          alpha = .8) +
-  geom_sf(data = hlStreets2,
-		  inherit.aes = FALSE,
-		  color = hlColor,
-		  size = hlStreetSize,
-		  alpha = .6)+
-  geom_sf(data = hlStreets3,
-		  inherit.aes = FALSE,
-		  color = hlColor,
-		  size = hlStreetSize,
-		  alpha = .6)+
-  geom_sf(data = hlStreetsPoly,
-		  inherit.aes = FALSE,
-		  fill = hlColor,
-		  size = 0,
-		  alpha = 1)+
+#  geom_sf(data = hlStreets1,
+#          color = hlColor,
+#          size = hlStreetSize,
+#          alpha = .8) +
+#  geom_sf(data = hlStreets2,
+#		  inherit.aes = FALSE,
+#		  color = hlColor,
+#		  size = hlStreetSize,
+#		  alpha = .6)+
+#  geom_sf(data = hlStreets3,
+#		  inherit.aes = FALSE,
+#		  color = hlColor,
+#		  size = hlStreetSize,
+#		  alpha = .6)+
+#  geom_sf(data = hlStreetsPoly,
+#		  inherit.aes = FALSE,
+#		  fill = hlColor,
+#		  size = 0,
+#		  alpha = 1)+
+#annotation_raster(mypng, ymin = 4.5,ymax= 5,xmin = 30,xmax = 35)
+  annotation_raster(mypng, ymin=50.87316, ymax=50.88257, xmin=4.69101, xmax=4.71391)+
   geom_sf(data = sfNotWorkingANPR,
 		  size = 5, 
 		  shape = 24,
@@ -187,4 +207,5 @@ ggplot() +
 
 print(sfNotWorkingANPR)
 print(sfworkingANPR)
-ggsave("/tmp/wmleuv/mapANPRon2020.png", width = 12, height = 10.5)
+ggsave("/tmp/wmleuv/mapANPR2020.png", width = 12, height = 10.5)
+#ggsave("/tmp/wmleuv/mapANPR2020small.png", width = 12, height = 10.5)

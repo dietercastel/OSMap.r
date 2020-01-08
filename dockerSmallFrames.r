@@ -167,9 +167,9 @@ makeFrame <- function(year,
 	ggsave(paste("/tmp/wmleuv/map",year,bis,".png",sep=""), plot=yearPlot, width = 12, height=10.5)
 }
 
-makeFrame(years[1],bis="small",xbb=newXbounds,ybb=newYbounds)
-makeFrame(years[2],bis="small",xbb=newXbounds,ybb=newYbounds)
-#makeFrame(years[3])
+#makeFrame(years[1],bis="small",xbb=newXbounds,ybb=newYbounds)
+#makeFrame(years[2],bis="small",xbb=newXbounds,ybb=newYbounds)
+makeFrame(years[3],bis="small",xbb=newXbounds,ybb=newYbounds)
 #makeFrame(years[3],
 	  #bis="bis",
 	  #backgroundColor=rgb(red = 1, green = 0, blue = 0, alpha = 0.3),

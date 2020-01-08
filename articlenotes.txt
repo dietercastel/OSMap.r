@@ -5,23 +5,26 @@ DONE 2) tekst:
 Leuven, de rode straten filmt de politie permanent.
 Leuven, in het rode gebied zet de politie mobiele camera's in. 
 + Jaartal
-2) image 1,2 centered, zeker met straatnamen
-4) Oog/camera in't rood cctv.png
+DONE 2) image 1,2 centered, zeker met straatnamen
+DONE 4) Oog/camera in't rood cctv.png
 DONE 5) Lettertype van Apache, \/ a Leuven
-6) straatnamen
 DONE 7) Dijle dikker
+
+6) straatnamen
 8) Perrons inkleuren
 
 
 Artikel 2
 
-1) Uitsnijding 3 camera's
-2) Straatnamen erbij
-3) tekst:
+DONE 2) Straatnamen erbij
+N/A 4) Ofwel gele wandelstraten snijden.
+DONE 5) Ofwel overlay van 20170920circulatieplandef_0.pdf (het paarse deel)
+DONE 6) FIX Kapucijnenvoer 8 ->2 ?
+
+DONE 1) Uitsnijding 3 camera's
+DONE 3) tekst:
 Leuven
-3) Oog/camera in't rood cctv.png + Tekst ANPR
-4) Ofwel gele wandelstraten snijden.
-5) Ofwel overlay van 20170920circulatieplandef_0.pdf (het paarse deel)
+DONE 3) Oog/camera in't rood cctv.png + Tekst ANPR
 
 
 

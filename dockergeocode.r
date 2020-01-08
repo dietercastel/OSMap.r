@@ -39,7 +39,7 @@ anprNotWorking = c(
 
 				"Hoegaardsestraat 2",
 
-				"Kapucijnenvoer 8",
+				"Cuythoek, Kapucijnenvoer", # WAS 8 (but not accurate) 
 
 				"Krakenstraat 7",
 
@@ -190,8 +190,8 @@ streetsAllowed = c(
 				"Zeelstraat"
 			  )
 
-#print(anprNotWorking)
-#save(anprNotWorking,file="/tmp/wmleuv/anprNotWorking.Rdata")
+print(anprNotWorking)
+save(anprNotWorking,file="/tmp/wmleuv/anprNotWorking.Rdata")
 #print(streetsAllowed)
 #save(streetsAllowed,file="/tmp/wmleuv/streetsAllowed.Rdata")
 
@@ -287,13 +287,13 @@ save(vgz2, file="/tmp/wmleuv/vgz2.Rdata")
 #save(streetsAllowedOSM, file="/tmp/wmleuv/streetsAllowedOSM.Rdata")
 #SAVED 						^^^
 
-#anprNotWorkingOSM <- anprNotWorking%>% 
-#	map(addCity,details=TRUE) %>%
-#	map(geocode_OSM, details=TRUE)
-#
+anprNotWorkingOSM <- anprNotWorking%>% 
+	map(addCity,details=TRUE) %>%
+	map(geocode_OSM, details=TRUE)
+
 # Saving due to local cache policy of nominatim.
-#save(anprNotWorkingOSM, file="/tmp/wmleuv/anprNotWorkingOSM.Rdata")
-##SAVED 						^^^
+save(anprNotWorkingOSM, file="/tmp/wmleuv/anprNotWorkingOSM.Rdata")
+#SAVED 						^^^
 
 # Single case example first mapping!
 #gbn<-geocode_OSM("Bondgenotenlaan, Leuven, Belgium",details=TRUE)

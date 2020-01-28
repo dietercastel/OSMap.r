@@ -190,13 +190,13 @@ ggplot() +
 #		  fill = hlColor,
 #		  size = 0,
 #		  alpha = 1)+
-#  geom_sf(data = sfNotWorkingANPR,
-#		  size = 5, 
-#		  shape = 24,
+  geom_sf(data = sfNotWorkingANPR,
+		  size = 5, 
+		  shape = 24,
 		  #size = 3, 
 		  #shape = 21,
 		  #fill = apacheColors["success"]) +
-#		  fill = apacheColors["error"]) +
+		  fill = apacheColors["error"]) +
   geom_sf(data = sfworkingANPR,
 		  size = 5, 
 		  shape = shapesworkingANPR,

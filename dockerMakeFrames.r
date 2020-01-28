@@ -154,7 +154,7 @@ makeFrame <- function(year,bis="",backgroundColor=apacheColors["brandLight"],tit
 makeFrame(years[1], backgroundColor="white")
 makeFrame(years[2], backgroundColor="white")
 makeFrame(years[3], backgroundColor="white")
-makeFrame(years[3],
+#makeFrame(years[3],
 	  bis="bis",
 	  backgroundColor=rgb(red = 1, green = 0, blue = 0, alpha = 0.3),
 	  titleText = "Leuven, in het rode gebied zet de politie mobiele camera's in.")

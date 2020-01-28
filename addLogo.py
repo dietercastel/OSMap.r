@@ -4,19 +4,22 @@ import re
 legendColor = "#ce4544"
 streetText = "De lokale politie filmt de rode straten 24/7."
 centerText = "De lokale politie filmt de rode straten in het centrum 24/7."
+wandelText = "Rode     = ANPR; Rode zone = gefilmed; wandelroute Donker Blauw."
 overlayText = "De lokale politie zet mobiele camera's in op heel het grondgebied."
 ANPRSmallText = "3 werkende ANPR-camera's aan Leuven station & tiensestwg."
 ANPRText = "Bij elke driehoek staan ANPR-camera's."
 runFlag = [True,
-           True,
-           True,
-           True,
-           True,
-           True,
-           True,
-           True,
-           True]
-imgNames = ["trimmed_map2005small.png",
+           False,
+           False,
+           False,
+           False,
+           False,
+           False,
+           False,
+           False,
+           False]
+imgNames = ["trimmed_wandeling2020.png",
+        "trimmed_map2005small.png",
         "trimmed_map2013small.png",
         "trimmed_map2020small.png",
         "trimmed_map2005.png",
@@ -25,7 +28,8 @@ imgNames = ["trimmed_map2005small.png",
         "trimmed_map2020bis.png",
         "trimmed_mapANPR2020small.png",
         "trimmed_mapANPR2020.png"]
-legendTxts = [centerText,
+legendTxts = [wandelText,
+        centerText,
         centerText,
         centerText,
         streetText,
@@ -80,6 +84,7 @@ def addLogo(imgName,legendTxt):
     draw = ImageDraw.Draw(txt)
     drawBorder(draw,(0,0), legendTxt, legendFont)
     draw.text((0,0), legendTxt, font=legendFont, fill=apacheError)
+    drawBorder(draw, (0,h-sH-10), signature, sigFont)
     draw.text((0,h-sH-10), signature, font=sigFont, fill=(0,0,0,255))
     draw.text((logoX+cW,cH*3/4), city, font=apacheFont, fill=apacheColor)
     draw.text((logoX+cW,cH+yH), year, font=apacheFont, fill=apacheColor)

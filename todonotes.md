@@ -1,0 +1,7 @@
+- remove Apache specifics, replace with tux logo/other font.
+- add install reqs
+- cleanup file structure
+- write tests (check hash of output file)
+- refactor code 
+- docs
+- publish short blog with, webms, reference to source etc.

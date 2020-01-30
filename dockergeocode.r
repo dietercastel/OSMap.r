@@ -70,7 +70,7 @@ anprNotWorking = c(
 streetsAllowed = c( 
 
 #				"perrons De Lijn",
-				"Oude Markt", # Ha! #policefail! They 'forgot' this one!
+				"Oude Markt", # Ha! #policefail! They forgot this one!
 				"Leuven station perron 1",
 				"Leuven station perron 2",
 				"Leuven station perron 3",
@@ -201,11 +201,11 @@ addCity <- function(street, details=FALSE){
   }
 }
 streets2005 = c( 
-				"Oude Markt", # Ha! #policefail! They 'forgot' this one!
+				"Oude Markt", # Ha! #policefail! They forgot this one!
 				"Mechelsestraat"
 				)
 streets2013 = c(
-				"Oude Markt", # Ha! #policefail! They 'forgot' this one!
+				"Oude Markt", # Ha! #policefail! They forgot this one!
 				"Diestsestraat",
 				"Mechelsestraat",
 				"Tiensestraat",
@@ -317,23 +317,3 @@ save(anprNotWorkingOSM, file="/tmp/wmleuv/anprNotWorkingOSM.Rdata")
 # 		osmdata_sf()
 # }
 
-
-# aStreetIds <- streetsAllowedOSM%>% 
-# 	map(getIds)
-
-#print(aStreetIds)
-
-#save(aStreetIds, file="/tmp/wmleuv/aStreetIds.Rdata")
-
-# sfAStreets <- aStreetIds%>%
-# 	map(sfify)
-
-#print(sfAStreets)
-#save(sfAStreets, file="/tmp/wmleuv/sfAStreets.Rdata")
-
-# It's only a point lookup so rather geocode_OSM?
-#sfANPRNW <- anprNotWorkingOSM %>%
-#	map(sfify)
-
-#print(sfANPRNW)
-#save(sfANPRNW, file="/tmp/wmleuv/sfANPRNW.Rdata")

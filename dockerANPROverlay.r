@@ -2,25 +2,28 @@ library(tidyverse)
 library(osmdata)
 library(sf)
 library(purrr)
-# install.packages("ggimage") # required in that docker container
-#library(ggimage)
-#library(tmap)
-#library(tmaptools)
 load("/tmp/wmleuv/streets.Rdata") # streets
 load("/tmp/wmleuv/smallstreets.Rdata") # smallStreets
-##load("/tmp/wmleuv/allstreets.Rdata") # allStreets
+load("/tmp/wmleuv/allstreets.Rdata") # allStreets
 ## Loading this large object (150MB) results in killing the process in docker
-load("/tmp/wmleuv/pedStreets.Rdata") # pedStreets
+## But not after increasing docker memory.
 load("/tmp/wmleuv/dijle.Rdata")
-##load("/tmp/wmleuv/streetsAllowedOSM.Rdata")
-load("/tmp/wmleuv/anprNotWorkingOSM.Rdata") # anprNotWorkingOSM
-#load("/tmp/wmleuv/sfAStreets.Rdata")
-#load("/tmp/wmleuv/aStreetIds.Rdata") # aStreetIds
-load("/tmp/wmleuv/anprNotWorking.Rdata") # anprNotWorking
-#load("/tmp/wmleuv/sunders.Rdata") # 
+#load("/tmp/wmleuv/anprNotWorking.Rdata") # anprNotWorking # List of ANPR adresses 
+load("/tmp/wmleuv/anprNotWorkingOSM.Rdata") # anprNotWorkingOSM # OSM object list of coresponding coords.
+#load("/tmp/wmleuv/sunders.Rdata") # sunders data with OSM carted camera's
 
+# Alternative plotting of pedestrian zone
+#load("/tmp/wmleuv/pedStreets.Rdata") # pedStreets
 #load("/tmp/wmleuv/vgz1.Rdata")
 #load("/tmp/wmleuv/vgz2.Rdata")
+# pedZone <- voetgangerszone1
+# pedZone <- voetgangerszone2
+#pedZone <- c(vgz1,vgz2)
+
+#hlStreets1 <- streets$osm_lines [which (streets$osm_lines$name %in% pedZone), ]
+#hlStreets2 <- smallStreets$osm_lines [which (smallStreets$osm_lines$name %in% pedZone), ]
+#hlStreets3 <- pedStreets$osm_lines [which (pedStreets$osm_lines$name %in% pedZone), ]
+#hlStreetsPoly <- pedStreets$osm_polygons [which (pedStreets$osm_polygons$name %in% pedZone), ]
 
 source(file="/tmp/wmleuv/apacheColors.r")
 #print(apacheColors["error"])
@@ -46,14 +49,6 @@ riverSize <- .8
 load("/tmp/wmleuv/leuvCoord.Rdata")
 
 
-# pedZone <- voetgangerszone1
-# pedZone <- voetgangerszone2
-#pedZone <- c(vgz1,vgz2)
-
-#hlStreets1 <- streets$osm_lines [which (streets$osm_lines$name %in% pedZone), ]
-#hlStreets2 <- smallStreets$osm_lines [which (smallStreets$osm_lines$name %in% pedZone), ]
-#hlStreets3 <- pedStreets$osm_lines [which (pedStreets$osm_lines$name %in% pedZone), ]
-#hlStreetsPoly <- pedStreets$osm_polygons [which (pedStreets$osm_polygons$name %in% pedZone), ]
 
 getXs <- function(OSMobj){
 	#print(OSMobj$query)
@@ -77,7 +72,6 @@ NWAlat = map(anprNotWorkingOSM, getYs)
 notWorkingANPR <- data.frame(longitude = unlist(NWAlong), latitude = unlist(NWAlat))
 sfNotWorkingANPR <- st_as_sf(notWorkingANPR, coords = c("longitude", "latitude"), crs = 4326, agr = "constant")
 
-#print(sunders$osm_points)
 #print(sfNotWorkingANPR)
 
 xoffset = c(0.04, -0.04)
@@ -88,129 +82,65 @@ ybounds = leuvCoord[2,1:2] + yoffset
 
 #left top
 #50.88394, 4.71002
+#right bottem
 #50.866, 4.7366
 
+# Other coords for smaller frame.
+smallXbounds = c(4.71002, 4.7366)
+names(smallXbounds) = c("min","max")
+smallYbounds = c(50.866, 50.88394)
+names(smallYbounds) = c("min","max")
 
-newXbounds = c(4.71002, 4.7366)
-names(newXbounds) = c("min","max")
-newYbounds = c(50.866, 50.88394)
-names(newYbounds) = c("min","max")
-
-#xbounds <- newXbounds
-#ybounds <- newYbounds
-
-# Only three working ones:
+# Only three working ones (WELLlll apperantly rather: working as in generating revenue :^)
 # - Geldkoe-Martenlarenplein 50.88057, 4.71487
 # - Hoegaardsestraat 50.868489, 4.722256
 # - Oudebaan 50.868851, 4.725876
 workingANPR <- data.frame(longitude = c(4.71487,4.722256,4.725876), latitude = c(50.88055,50.868489,50.868851))
 shapesworkingANPR <- c(24,24,25)
 sfworkingANPR <- st_as_sf(workingANPR, coords = c("longitude", "latitude"), crs = 4326, agr = "constant")
-#print(sfworkingANPR)
 
 print(xbounds)
 print(ybounds)
-#print(sfAStreets)
 
-#print(streets$osm_polygons)
-#print(hlStreets1)
-#print(hlStreets2[,1:2]$name)
+makeFile <- function(xbounds,ybounds,filename){
+	ggplot() +
+	#   geom_sf(data = allStreets$osm_lines,
+	#           inherit.aes = FALSE,
+	#           color = streetColor,
+	#           size = streetSize)+
+	  geom_sf(data = smallStreets$osm_lines,
+			  inherit.aes = FALSE,
+			  color = streetColor,
+			  size = streetSize,
+			  alpha = .6)+
+		# TODO: automate this overlaying, now it's manual tweaking and screenshotting.
+	  annotation_raster(mypng, ymin=50.8728, ymax=50.88232, xmin=4.68898, xmax=4.7169)+
+	  geom_sf(data = dijle$osm_lines,
+		  inherit.aes = FALSE,
+		  color = riverColor,
+		  size = riverSize) +
+	  geom_sf(data = streets$osm_lines,
+		  inherit.aes = FALSE,
+		  color = apacheColors["textGrey"],
+		  size = streetSize) +
+	  geom_sf(data = sfNotWorkingANPR,
+			  size = 5, 
+			  shape = 24,
+			  fill = apacheColors["error"]) +
+	  geom_sf(data = sfworkingANPR,
+			  size = 5, 
+			  shape = shapesworkingANPR,
+			  fill = apacheColors["error"]) +
+	  coord_sf(xlim = xbounds, 
+		   ylim = ybounds,
+		   expand = FALSE)+
+	  theme_void()+
+	  theme(
+	    #plot.background = element_rect(fill = apacheColors["brandLight"])
+	    plot.background = element_rect(fill = "white")
+	  )
 
-#getLines <- function(osmdataObj){
-#	osmdataObj$osm_lines
-#}
-
-#sfALines <- sfAStreets%>%
-#	map(getLines)
-
-#toSFDF <- function(collist){
-#	result <- collist%>%
-#		map(st_sfc)%>%
-#		rbind()
-#}
-#SFDFALines <- toSFDF(sfALines)
-#print(SFDFALines)
-
-ggplot() +
-  # geom_sf(data = allStreets$osm_lines,
-  #         inherit.aes = FALSE,
-  #         color = "white",
-  #         size = .4,
-  #         alpha = .8) +
-#annotation_raster(mypng, ymin = 4.5,ymax= 5,xmin = 30,xmax = 35)
-	# 50.88232, 4.68898
-	# 50.8731, 4.717
-#  annotation_raster(mypng, ymin=50.8728, ymax=50.88232, xmin=4.68898, xmax=4.7169)+
-  geom_sf(data = smallStreets$osm_lines,
-        	  inherit.aes = FALSE,
-        	  color = streetColor,
-        	  size = streetSize,
-        	  alpha = .6)+
-  #geom_sf(data = pedStreets$osm_lines,
-        	  #inherit.aes = FALSE,
-        	  #color = streetColor,
-        	  #size = streetSize,
-        	  #alpha = .6)+
-  geom_sf(data = dijle$osm_lines,
-          inherit.aes = FALSE,
-          color = riverColor,
-          size = riverSize,
-          alpha = .5) +
-  annotation_raster(mypng, ymin=50.8728, ymax=50.88232, xmin=4.68898, xmax=4.7169)+
-  geom_sf(data = streets$osm_lines,
-          inherit.aes = FALSE,
-          color = apacheColors["textGrey"],
-          size = streetSize,
-          alpha = .2) +
-  # geom_sf(data = hhstr$osm_lines,
-  #         inherit.aes = FALSE,
-  #         color = "error",
-  #         size = .2,
-  #         alpha = .5) +
-  # geom_sf(data = allHlStreets,
-  #         color = "error",
-  #         size = .4,
-  #         alpha = .8) +
-#  geom_sf(data = hlStreets1,
-#          color = hlColor,
-#          size = hlStreetSize,
-#          alpha = .8) +
-#  geom_sf(data = hlStreets2,
-#		  inherit.aes = FALSE,
-#		  color = hlColor,
-#		  size = hlStreetSize,
-#		  alpha = .6)+
-#  geom_sf(data = hlStreets3,
-#		  inherit.aes = FALSE,
-#		  color = hlColor,
-#		  size = hlStreetSize,
-#		  alpha = .6)+
-#  geom_sf(data = hlStreetsPoly,
-#		  inherit.aes = FALSE,
-#		  fill = hlColor,
-#		  size = 0,
-#		  alpha = 1)+
-  geom_sf(data = sfNotWorkingANPR,
-		  size = 5, 
-		  shape = 24,
-		  #size = 3, 
-		  #shape = 21,
-		  #fill = apacheColors["success"]) +
-		  fill = apacheColors["error"]) +
-  geom_sf(data = sfworkingANPR,
-		  size = 5, 
-		  shape = shapesworkingANPR,
-		  fill = apacheColors["error"]) +
-  coord_sf(xlim = xbounds, 
-           ylim = ybounds,
-           expand = FALSE)+
-  theme_void()+
-  theme(
-    #plot.background = element_rect(fill = apacheColors["brandLight"])
-    plot.background = element_rect(fill = "white")
-  )
-
-#print(sfNotWorkingANPR)
-#print(sfworkingANPR)
-ggsave("/tmp/wmleuv/mapANPR2020.png", width = 12, height = 10.5)
-#ggsave("/tmp/wmleuv/mapANPR2020small.png", width = 12, height = 10.5)
+	ggsave(filename, width = 12, height = 10.5)
+}
+makeFile(xbounds,ybounds,"/tmp/wmleuv/mapANPR2020.png")
+makeFile(smallXbounds,smallYbounds,"/tmp/wmleuv/mapANPR2020small.png")

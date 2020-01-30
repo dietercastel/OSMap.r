@@ -9,15 +9,15 @@ overlayText = "De lokale politie zet mobiele camera's in op heel het grondgebied
 ANPRSmallText = "3 werkende ANPR-camera's aan Leuven station & tiensestwg."
 ANPRText = "Bij elke driehoek staan ANPR-camera's."
 runFlag = [True,
-           False,
-           False,
-           False,
-           False,
-           False,
-           False,
-           False,
-           False,
-           False]
+           True,
+           True,
+           True,
+           True,
+           True,
+           True,
+           True,
+           True,
+           True]
 imgNames = ["trimmed_wandeling2020.png",
         "trimmed_map2005small.png",
         "trimmed_map2013small.png",

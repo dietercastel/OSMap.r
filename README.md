@@ -5,8 +5,12 @@ Security camera visualisation of Leuven.
 
 You might want to increase your docker memory & swap file size (in Preferences/Advanced) because R (or my code?) has a crashing tendency when not given enough resources.
 
-In the repository folder run this (after installing docker):.
+After installing docker pull the required container (with R and all required libraries installed.)
+```bash
+docker pull robinlovelace/geocompr
+```
 
+Then run a command prompt in the docker:
 ```bash
 ./docker.sh
 ```
@@ -17,17 +21,14 @@ The repository map should be synced under `/tm/wmleuv` and if you open that fold
 
 ```bash
 r dockerMakeFrames.r
-```
-
-and/or
-
-For the overlay version I manually grabbed a nicely pre-rendered OpenStreetMaps overlay of the required region. I'd still like to automate this step. (See issue TODO)
-
-```bash
+r dockerMakeSmallFrames.r
+r dockerMakeWandeling.r
 r dockerANPROverlay.r
 ```
 
-The output is placed inside the current directory.
+For the overlay version I manually grabbed a nicely pre-rendered OpenStreetMaps overlay of the required region. I'd still like to automate this step. (See issue TODO)
+
+The output is placed inside `output` directory.
 
 ## Gif/webm making
 

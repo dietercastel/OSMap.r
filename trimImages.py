@@ -24,13 +24,14 @@ def trim(im):
 def trimFile(fn):
     im = Image.open(fn)
     im = trim(im)
-    newFN = "trimmed_"+fn
+    # dirty fix for adding output folder.
+    newFN = "output/trimmed_"+fn[7:]
     im.save(newFN)
     print("Saved file " + newFN)
 
 if str(sys.argv[1]) == "-all":
     for i in imgNames:
         print("Processing: " + i)
-        trimFile(i)
+        trimFile("output/"+i)
 else: 
     trimFile(sys.argv[1])

@@ -9,7 +9,6 @@ load("/tmp/wmleuv/allstreets.Rdata") # allStreets
 load("/tmp/wmleuv/pedStreets.Rdata") # pedStreets
 load("/tmp/wmleuv/dijle.Rdata") # dijle
 load("/tmp/wmleuv/sfAStreets.Rdata")
-load("/tmp/wmleuv/aStreetIds.Rdata") # aStreetIds
 
 
 
@@ -82,8 +81,6 @@ basePlot <-	ggplot() +
 	  #         size = .4,
 	  #         alpha = .8) +
 
-ggsave("/tmp/wmleuv/baseplot.png", width=12, height=12)
-
 load("/tmp/wmleuv/streets2005.Rdata") #  streets2005
 load("/tmp/wmleuv/streets2013.Rdata") # streets2013
 load("/tmp/wmleuv/streetsAllowed.Rdata") # streetsAllowed
@@ -148,13 +145,13 @@ makeFrame <- function(year,bis="",backgroundColor=apacheColors["brandLight"],tit
 		plot.title = element_text(size = 18, face = "bold"),
 	  ) 
 
-	ggsave(paste("/tmp/wmleuv/map",year,bis,".png",sep=""), plot=finPlot, width = 12, height=10.22)
+	ggsave(paste("/tmp/wmleuv/output/map",year,bis,".png",sep=""), plot=finPlot, width = 12, height=10.22)
 }
 
 makeFrame(years[1], backgroundColor="white")
 makeFrame(years[2], backgroundColor="white")
 makeFrame(years[3], backgroundColor="white")
-#makeFrame(years[3],
+makeFrame(years[3],
 	  bis="bis",
 	  backgroundColor=rgb(red = 1, green = 0, blue = 0, alpha = 0.3),
 	  titleText = "Leuven, in het rode gebied zet de politie mobiele camera's in.")

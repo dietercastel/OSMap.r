@@ -88,8 +88,10 @@ def addLogo(imgName,legendTxt):
     draw.text((0,h-sH-10), signature, font=sigFont, fill=(0,0,0,255))
     draw.text((logoX+cW,cH*3/4), city, font=apacheFont, fill=apacheColor)
     draw.text((logoX+cW,cH+yH), year, font=apacheFont, fill=apacheColor)
-    Image.alpha_composite(img, txt).save("logo_"+imgName,"PNG")
+    Image.alpha_composite(img, txt).save("output/logo_"+imgName[7:],"PNG")
 
 for idx,im in enumerate(imgNames):
     if runFlag[idx]:
-        addLogo(im,legendTxts[idx])
+        fn = "output/"+im
+        print(fn)
+        addLogo(fn,legendTxts[idx])

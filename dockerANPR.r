@@ -15,7 +15,6 @@ load("/tmp/wmleuv/dijle.Rdata")
 #load("/tmp/wmleuv/streetsAllowedOSM.Rdata")
 load("/tmp/wmleuv/anprNotWorkingOSM.Rdata") # anprNotWorkingOSM
 load("/tmp/wmleuv/sfAStreets.Rdata")
-load("/tmp/wmleuv/aStreetIds.Rdata") # aStreetIds
 load("/tmp/wmleuv/anprNotWorking.Rdata") # anprNotWorking
 load("/tmp/wmleuv/sunders.Rdata") # 
 

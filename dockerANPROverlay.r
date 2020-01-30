@@ -142,5 +142,5 @@ makeFile <- function(xbounds,ybounds,filename){
 
 	ggsave(filename, width = 12, height = 10.5)
 }
-makeFile(xbounds,ybounds,"/tmp/wmleuv/mapANPR2020.png")
-makeFile(smallXbounds,smallYbounds,"/tmp/wmleuv/mapANPR2020small.png")
+makeFile(xbounds,ybounds,"/tmp/wmleuv/output/mapANPR2020.png")
+makeFile(smallXbounds,smallYbounds,"/tmp/wmleuv/output/mapANPR2020small.png")

@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 # This script coverts a black & white image to a PNG image with red & transparent.
 from PIL import ImageOps, Image
-imgPath = "/Users/dietercastel/Downloads/CCTV.PNG"
+imgPath = "CCTV.PNG"
 blackColor = (255,0,0,0)
 whiteColor = (255,255,255,0)
 

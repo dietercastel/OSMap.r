@@ -9,15 +9,15 @@ overlayText = "De lokale politie zet mobiele camera's in op heel het grondgebied
 ANPRSmallText = "3 werkende ANPR-camera's aan Leuven station & tiensestwg."
 ANPRText = "Bij elke driehoek staan ANPR-camera's."
 runFlag = [True,
-           True,
-           True,
-           True,
-           True,
-           True,
-           True,
-           True,
-           True,
-           True]
+           False,
+           False,
+           False,
+           False,
+           False,
+           False,
+           False,
+           False,
+           False]
 imgNames = ["trimmed_wandeling2020.png",
         "trimmed_map2005small.png",
         "trimmed_map2013small.png",
@@ -52,9 +52,13 @@ print(camLogo.getpixel((0,0)))
 camLogo = camLogo.resize((225,150),Image.ANTIALIAS) 
 (camW,camH) = camLogo.size
 (lW,lH) = scaledLogo.size
-sigFont = ImageFont.truetype(font="/Users/dietercastel/Downloads/OpenDyslexic-Bold.otf", size=50)
-legendFont = ImageFont.truetype(font="/Users/dietercastel/Downloads/Typesketchbook - NoyhBlack.otf", size=120)
-apacheFont = ImageFont.truetype(font="/Users/dietercastel/Downloads/Typesketchbook - NoyhBlack.otf", size=200)
+#sigFont = ImageFont.truetype(font="fonts/OpenDyslexic-Bold.otf", size=50)
+#legendFont = ImageFont.truetype(font="fonts/Typesketchbook - NoyhBlack.otf", size=120)
+#apacheFont = ImageFont.truetype(font="fonts/Typesketchbook - NoyhBlack.otf", size=200)
+# Replacement fonts for now.
+sigFont = ImageFont.truetype('fonts/FreeMono.ttf', 50)
+legendFont = ImageFont.truetype('fonts/FreeMono.ttf', 120)
+apacheFont = ImageFont.truetype('fonts/FreeMono.ttf', 200)
 signature="@DieterCastel"
 (sW,sH) = sigFont.getsize(signature)
 city = "Leuven"

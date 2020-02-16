@@ -38,15 +38,6 @@ hlColor <- apacheColors["yellowLocalDark"]
 riverColor <- apacheColors["brandDarkest"]
 riverSize <- .8
 
-# Get data from Surveillance under surveillance project:
-# https://kamba4.crux.uberspace.de/
-# sunders <- getbb("Leuven Belgium")%>%
-#      opq()%>%
-#      add_osm_feature(key = "man_made", value="surveillance")%>%
-#      osmdata_sf()
-# save(sunders, file= "/tmp/wmleuv/sunders.Rdata")
-
-
 #leuvCoord <-getbb("Leuven Belgium")
 load("/tmp/wmleuv/leuvCoord.Rdata")
 

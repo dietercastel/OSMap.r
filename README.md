@@ -1,6 +1,12 @@
 # wmleuv
 Security camera visualisation of Leuven.
 
+This project uses:
+
+- R scripts (inside Docker for generating map-based visualisations)
+- Python 3 scripts (for post-processing generated images)
+- Bash scripts (for minor things)
+
 ## Docker
 
 You might want to increase your docker memory & swap file size (in Preferences/Advanced) because R (or my code?) has a crashing tendency when not given enough resources.
@@ -20,13 +26,14 @@ This will take you inside the docker container ready to run the r scripts.
 The repository map should be synced under `/tm/wmleuv` and if you open that folder inside the container you can run scripts like:
 
 ```bash
+r dockergeocode.r # required only once for generating necessary Rdata files.
 r dockerMakeFrames.r
 r dockerMakeSmallFrames.r
 r dockerMakeWandeling.r
 r dockerANPROverlay.r
 ```
 
-For the overlay version I manually grabbed a nicely pre-rendered OpenStreetMaps overlay of the required region. I'd still like to automate this step. (See issue TODO)
+For the overlay version I manually grabbed a nicely pre-rendered OpenStreetMaps overlay of the required region. I'd still like to automate this step. (Currently a Work In Progress in directory WIP)
 
 The output is placed inside `output` directory.
 

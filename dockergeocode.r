@@ -1,3 +1,5 @@
+# Script doing geocodings and writing results out to Rdata files used in other scripts.
+# Please don't spam the APIs so use with caution, uncomment geocodings you don't need.
 library(sf)
 library(osmdata)
 library(tmap)
@@ -193,7 +195,7 @@ streetsAllowed = c(
 print(anprNotWorking)
 save(anprNotWorking,file="/tmp/wmleuv/anprNotWorking.Rdata")
 #print(streetsAllowed)
-#save(streetsAllowed,file="/tmp/wmleuv/streetsAllowed.Rdata")
+save(streetsAllowed,file="/tmp/wmleuv/streetsAllowed.Rdata")
 
 addCity <- function(street, details=FALSE){
   if(details == TRUE){
@@ -213,8 +215,8 @@ streets2013 = c(
 				"Naamsestraat"
 )
 
-#save(streets2005, file="/tmp/wmleuv/streets2005.Rdata")
-#save(streets2013, file="/tmp/wmleuv/streets2013.Rdata")
+save(streets2005, file="/tmp/wmleuv/streets2005.Rdata")
+save(streets2013, file="/tmp/wmleuv/streets2013.Rdata")
 
 vgz1 = c(
 "Boekhandelstraat",
@@ -317,3 +319,13 @@ save(anprNotWorkingOSM, file="/tmp/wmleuv/anprNotWorkingOSM.Rdata")
 # 		osmdata_sf()
 # }
 
+# Get data from Surveillance under surveillance project:
+# https://kamba4.crux.uberspace.de/
+# sunders <- getbb("Leuven Belgium")%>%
+#      opq()%>%
+#      add_osm_feature(key = "man_made", value="surveillance")%>%
+#      osmdata_sf()
+# save(sunders, file= "/tmp/wmleuv/sunders.Rdata")
+
+leuvCoord <-getbb("Leuven Belgium")
+save(leuvCoord, file= "/tmp/wmleuv/leuvCoord.Rdata")

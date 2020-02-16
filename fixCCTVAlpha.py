@@ -16,15 +16,6 @@ print(r.getpixel((329,325))) # should be white
 #Convert to pure black&white
 data = r.getdata()
 
-# w, h = data.size
-#
-# for y in range(h):
-#     for x in range(w):
-#         if data[x,y] == 0:
-#             newData.append((255, 0, 0, 255))
-#         else:
-#             newData.append((255, 255, 255, 0))
-
 newData = []
 for p in data:
     if p == 0:

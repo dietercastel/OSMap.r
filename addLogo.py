@@ -52,13 +52,12 @@ print(camLogo.getpixel((0,0)))
 camLogo = camLogo.resize((225,150),Image.ANTIALIAS) 
 (camW,camH) = camLogo.size
 (lW,lH) = scaledLogo.size
-#sigFont = ImageFont.truetype(font="fonts/OpenDyslexic-Bold.otf", size=50)
-#legendFont = ImageFont.truetype(font="fonts/Typesketchbook - NoyhBlack.otf", size=120)
-#apacheFont = ImageFont.truetype(font="fonts/Typesketchbook - NoyhBlack.otf", size=200)
+sigFont = ImageFont.truetype(font="fonts/OpenDyslexic-Bold.otf", size=50)
+#legendFont = ImageFont.truetype(font="fonts/OpenDyslexic-Bold.otf", size=120)
+legendFont = ImageFont.truetype(font="fonts/Typesketchbook - NoyhBlack.otf", size=120)
+#apacheFont = ImageFont.truetype(font="fonts/OpenDyslexic-Bold.otf", size=200)
+apacheFont = ImageFont.truetype(font="fonts/Typesketchbook - NoyhBlack.otf", size=200)
 # Replacement fonts for now.
-sigFont = ImageFont.truetype('fonts/FreeMono.ttf', 50)
-legendFont = ImageFont.truetype('fonts/FreeMono.ttf', 120)
-apacheFont = ImageFont.truetype('fonts/FreeMono.ttf', 200)
 signature="@DieterCastel"
 (sW,sH) = sigFont.getsize(signature)
 city = "Leuven"
@@ -92,10 +91,11 @@ def addLogo(imgName,legendTxt):
     draw.text((0,h-sH-10), signature, font=sigFont, fill=(0,0,0,255))
     draw.text((logoX+cW,cH*3/4), city, font=apacheFont, fill=apacheColor)
     draw.text((logoX+cW,cH+yH), year, font=apacheFont, fill=apacheColor)
-    Image.alpha_composite(img, txt).save("output/logo_"+imgName[7:],"PNG")
+    outputName = "output/logo_"+imgName[7:]
+    print("Writing file in " + outputName)
+    Image.alpha_composite(img, txt).save(outputName,"PNG")
 
 for idx,im in enumerate(imgNames):
     if runFlag[idx]:
         fn = "output/"+im
-        print(fn)
         addLogo(fn,legendTxts[idx])

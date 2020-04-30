@@ -28,7 +28,7 @@ xbounds = leuvCoord[1,1:2] + xoffset
 ybounds = leuvCoord[2,1:2] + yoffset
 
 makeRaster <- function(filename, topLeftLat, topLeftLong, botRightLat, botRightLong, ...){
-	path <- paste('/tmp/wmleuv/osmtiling/images/',filename, sep="")
+	path <- paste('/tmp/wmleuv/osmtiling/be/',filename, sep="")
 	tile <- readPNG(path)
 	xmx = max(topLeftLong, botRightLong)
 	xmn = min(topLeftLong, botRightLong)

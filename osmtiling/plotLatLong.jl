@@ -6,7 +6,8 @@ println("lol")
 
 df = CSV.read("tilesLeuven.csv")
 
-p = scatter(df[!,:topLeftLat],df[!,:topLeftlong])
-p = scatter!(df[!,:botRightLat],df[!,:botRightLong])
+(r,c) = size(df)
+p = scatter(df[!,:topLeftLat],df[!,:topLeftlong],group = repeat(["topLeft"],r))
+p = scatter!(df[!,:botRightLat],df[!,:botRightLong], group = repeat(["bottomRight"],r))
 savefig(p,"plot.png")
 

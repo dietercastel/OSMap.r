@@ -41,12 +41,12 @@ tlLatLong = matrixify(map(x->tileNum2LatLong(x...),zxys))
 brLatLong = matrixify(map(x->br2LatLong(x...),zxys))
 
 println(brLatLong)
-df = DataFrame(filenames = fns,
+df = DataFrame(filename = fns,
 			   zoom=zxyM[:,1],
 			   xtile=zxyM[:,2],
 			   ytile=zxyM[:,3],
 			   topLeftLat = tlLatLong[:,1],
-			   topLeftlong = tlLatLong[:,2],
+			   topLeftLong = tlLatLong[:,2],
 			   botRightLat = brLatLong[:,1],
 			   botRightLong = brLatLong[:,2])
 

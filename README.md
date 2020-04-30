@@ -23,7 +23,7 @@ Then run a command prompt in the docker:
 
 This will take you inside the docker container ready to run the r scripts.
 
-The repository map should be synced under `/tm/wmleuv` and if you open that folder inside the container you can run scripts like:
+The repository map should be synced under `/tmp/wmleuv` and if you open that folder inside the container you can run scripts like:
 
 ```bash
 r dockergeocode.r # required only once for generating necessary Rdata files.

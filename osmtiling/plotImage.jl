@@ -5,26 +5,26 @@ using Images
 
 df = CSV.read("tilesLeuven.csv")
 
+size(df)
 
-function plotMapImage(df,row)
-	img1 = load(joinpath("be",df[row,:filename]))
+#scatter([4.69],[50.9],size=(1799, 1280))
+function plotMapImage(row)
+	img1 = load(joinpath("be",row[:filename]))
 
 	lenY, lenX = size(img1)
 
-	minX = min(df[row,:botRightLong],df[row,:topLeftLong])
-	maxX = max(df[row,:botRightLong],df[row,:topLeftLong])
-	minY = min(df[row,:botRightLat],df[row,:topLeftLat])
-	maxY = max(df[row,:botRightLat],df[row,:topLeftLat])
+	minX = min(row[:botRightLong],row[:topLeftLong])
+	maxX = max(row[:botRightLong],row[:topLeftLong])
+	minY = min(row[:botRightLat],row[:topLeftLat])
+	maxY = max(row[:botRightLat],row[:topLeftLat])
 
 	rangeX = range(minX,stop=maxX,length=lenX)
 	rangeY = range(minY,stop=maxY,length=lenY)
-	p = plot!(rangeX,rangeY,reverse(img1,dims=1),yflip=false)
+	p = plot!(rangeX,rangeY,reverse(img1,dims=1),yflip=false,dpi=1200)
+	#p = plot!(rangeX,rangeY,reverse(img1,dims=1),yflip=false)
 end
 
-plotMapImage(df,1)
-plotMapImage(df,2)
-plotMapImage(df,3)
-plotMapImage(df,4)
+plotMapImage.(eachrow(df))
 
 (r,c) = size(df)
 

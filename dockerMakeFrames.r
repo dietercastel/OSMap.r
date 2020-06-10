@@ -25,7 +25,7 @@ xoffset = c(0.04, -0.04)
 yoffset = c(0.04, -0.053)
 logo <- data.frame(x = c(4.7177),
 				   y = c(50.8864),
-				   image = c("/tmp/wmleuv/apacheLokaal1.png"))
+				   image = c("/tmp/wmleuv/input/apacheLokaal1.png"))
 
 print(logo)
 load("/tmp/wmleuv/leuvCoord.Rdata")

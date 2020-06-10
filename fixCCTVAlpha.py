@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 # This script coverts a black & white image to a PNG image with red & transparent.
 from PIL import ImageOps, Image
-imgPath = "CCTV.PNG"
+imgPath = "input/CCTV.PNG"
 blackColor = (255,0,0,0)
 whiteColor = (255,255,255,0)
 
@@ -31,4 +31,4 @@ r.putdata(newData)
 print(r.getpixel((0,0))) # should be transp 
 print(r.getpixel((250,150)))
 print(r.getpixel((329,325))) # should be transp 
-r.save("CCTV_RED.png", "PNG")
+r.save("output/CCTV_RED.png", "PNG")

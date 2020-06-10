@@ -38,8 +38,8 @@ legendTxts = [wandelText,
         overlayText,
         ANPRSmallText,
         ANPRText]
-logoName = "apacheLokaal2.png"
-camLogoName = "CCTV_RED.png"
+logoName = "input/ApacheLokaal2.png"
+camLogoName = "output/CCTV_RED.png"
 
 logo = Image.open(logoName)
 newLogoSize = (600,600)

@@ -29,7 +29,7 @@ source(file="/tmp/wmleuv/apacheColors.r")
 #print(apacheColors["error"])
 
 library(png)
-mypng <- readPNG('/tmp/wmleuv/voetgangerszone.png')
+mypng <- readPNG('/tmp/wmleuv/input/voetgangerszone.png')
 
 streetSize <- 1.6
 streetColor <- apacheColors["textGrey"]

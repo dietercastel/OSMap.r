@@ -5,7 +5,7 @@ library(png)
 
 print(st_layers("/tmp/wmleuv/wandelingLeuven.gpx"))
 gpxLinestring <- st_read("/tmp/wmleuv/wandelingLeuven.gpx",layer="routes")
-mypng <- readPNG('/tmp/wmleuv/wandelingOSM.png')
+mypng <- readPNG('/tmp/wmleuv/input/wandelingOSM.png')
 
 print(gpxLinestring)
 

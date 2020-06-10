@@ -76,3 +76,8 @@ Which results in a modern, smaller webm in `./output` instead.
 ![Toenemende gefilmde straten in het centrum Leuven 2005,2013,2020](https://github.com/dietercastel/OSMap.r/raw/wmleuv/output/creepSmall.gif)
 
 ![Toenemende gefilmde straten regio ring van Leuven 2005,2013,2020](https://github.com/dietercastel/OSMap.r/raw/wmleuv/output/hlStreets.gif)
+
+[De Leuvense Privacy-wandeling van Apache](https://www.facebook.com/events/openbaar-entrepot-voor-de-kunsten-opek/volzet-apache-lokaal-de-slimme-stad/1208596742863953/)
+
+![Wandeling door het Leuvense stadscentrum.](https://github.com/dietercastel/OSMap.r/raw/wmleuv/output/wanderling2020.png)
+

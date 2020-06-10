@@ -70,6 +70,8 @@ Which results in a modern, smaller webm in `./output` instead.
 
 [Leuvense ANPR-camera’s filmen je zonder reden](https://www.apache.be/2020/01/08/leuvense-anpr-cameras-filmen-zonder-reden/)
 
+![ANPR camera's in het stadscentrum van Leuven](https://github.com/dietercastel/OSMap.r/raw/wmleuv/output/art2_2.png)
+
 [Winkeldief of shopper: Leuven filmt u, 24/7](https://www.apache.be/2020/01/09/hoe-leuven-een-gefilmde-stad-werd/)
 ![Toenemende gefilmde straten in het centrum Leuven 2005,2013,2020](https://github.com/dietercastel/OSMap.r/raw/wmleuv/output/creepSmall.gif)
 

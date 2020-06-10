@@ -22,7 +22,7 @@ function savePNGs(fileName)
 		println(url)
 		fn = toFileName(url)
 		println(fn)
-		base64txt = e["response"]["content"]["text"]
+m		base64txt = e["response"]["content"]["text"]
 		data = base64decode(base64txt)
 		open(io->write(io, data), joinpath("images",fn), "w")
 	end

@@ -1,3 +1,9 @@
+#!/usr/local/bin/julia
+# Calculates the top left and bottom right latitude/longitude for an entire directory of z-xtile-ytile.png files.
+# Result is saved to a csv file.
+#
+#
+# Author: Dieter Castel
 using DataFrames
 using CSV
 
@@ -31,24 +37,36 @@ function matrixify(arrOfArr)
 end
 
 # Fetched images by exporting from openstreetmap website.
-fns = readdir("images")
+#fns = readdir("images")
+function main()
+	if length(ARGS) != 2
+		println("Usage: \n ./calcCoords.jl directory outfilename.csv")	
+		return
+	end
 
-zxys = map(x->getZXY(x),fns)
-zxyM = matrixify(zxys)
+	folder = ARGS[1]
+	outFile = ARGS[2] 
+	fns = readdir(folder)
 
-#Top left latitude and longitude
-tlLatLong = matrixify(map(x->tileNum2LatLong(x...),zxys)) 
-brLatLong = matrixify(map(x->br2LatLong(x...),zxys))
+	zxys = map(x->getZXY(x),fns)
+	zxyM = matrixify(zxys)
 
-println(brLatLong)
-df = DataFrame(filename = fns,
-			   zoom=zxyM[:,1],
-			   xtile=zxyM[:,2],
-			   ytile=zxyM[:,3],
-			   topLeftLat = tlLatLong[:,1],
-			   topLeftLong = tlLatLong[:,2],
-			   botRightLat = brLatLong[:,1],
-			   botRightLong = brLatLong[:,2])
+	#Top left latitude and longitude
+	tlLatLong = matrixify(map(x->tileNum2LatLong(x...),zxys)) 
+	brLatLong = matrixify(map(x->br2LatLong(x...),zxys))
+
+	println(brLatLong)
+	df = DataFrame(filename = fns,
+					 zoom=zxyM[:,1],
+					 xtile=zxyM[:,2],
+					 ytile=zxyM[:,3],
+					 topLeftLat = tlLatLong[:,1],
+					 topLeftLong = tlLatLong[:,2],
+					 botRightLat = brLatLong[:,1],
+					 botRightLong = brLatLong[:,2])
 
 
-CSV.write("tilesLeuven.csv",df)
+	CSV.write(outFile,df)
+end
+
+main()

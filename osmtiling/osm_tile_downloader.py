@@ -74,6 +74,7 @@ def main(argv):
         print("%d:%d-%d/%d-%d" % (zoom, xtile, final_xtile, ytile, final_ytile))
         for x in range(xtile, final_xtile + 1, 1):
             for y in range(ytile, final_ytile - 1, -1):                
-                result = download_url(zoom, x, y)
+                print(zoom,x,y)
+                # result = download_url(zoom, x, y)
     
 main(argv)    

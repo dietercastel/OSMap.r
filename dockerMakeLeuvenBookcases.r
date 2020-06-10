@@ -6,7 +6,8 @@ library(tmaptools)
 library(purrr) # required for map
 library(png)
 
-load("/tmp/wmleuv/rdata/leuvCoord.Rdata") # loads leuvCoord
+# loads leuvCoord which is a saved getbb("Leuven, Belgium") call
+load("/tmp/wmleuv/rdata/leuvCoord.Rdata") 
 
 updateCases <- function(){
 	bookCases <- leuvCoord%>%
@@ -17,7 +18,8 @@ updateCases <- function(){
 	save(bookCases, file= "/tmp/wmleuv/rdata/bookCases.Rdata")
 }
 
-#updateCases() please respect the overpass API policy https://operations.osmfoundation.org/policies/api/ 
+#please respect the overpass API policy https://operations.osmfoundation.org/policies/api/ 
+#updateCases() 
 
 #xoffset = c(0.04, -0.04)
 #yoffset = c(0.04, -0.053)
@@ -42,6 +44,7 @@ makeRaster <- function(filename, topLeftLat, topLeftLong, botRightLat, botRightL
 
 plotCases <- function(xbounds,ybounds,filename){
 	load("/tmp/wmleuv/rdata/bookCases.Rdata")
+#	tileFrame <- read.csv('/tmp/wmleuv/osmtiling/z14-be.csv')
 	tileFrame <- read.csv('/tmp/wmleuv/osmtiling/tilesLeuven.csv')
 	print(tileFrame)
 	annotationRasters <- pmap(tileFrame,makeRaster)

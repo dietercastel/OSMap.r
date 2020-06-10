@@ -9,14 +9,14 @@ mypng <- readPNG('/tmp/wmleuv/input/wandelingOSM.png')
 
 print(gpxLinestring)
 
-load("/tmp/wmleuv/streets.Rdata") # streets
-load("/tmp/wmleuv/smallstreets.Rdata") # smallStreets
-load("/tmp/wmleuv/allstreets.Rdata") # allStreets
-load("/tmp/wmleuv/pedStreets.Rdata") # pedStreets
-load("/tmp/wmleuv/dijle.Rdata") # dijle
-load("/tmp/wmleuv/sfAStreets.Rdata")
+load("/tmp/wmleuv/rdata/streets.Rdata") # streets
+load("/tmp/wmleuv/rdata/smallstreets.Rdata") # smallStreets
+load("/tmp/wmleuv/rdata/allstreets.Rdata") # allStreets
+load("/tmp/wmleuv/rdata/pedStreets.Rdata") # pedStreets
+load("/tmp/wmleuv/rdata/dijle.Rdata") # dijle
+load("/tmp/wmleuv/rdata/sfAStreets.Rdata")
 
-load("/tmp/wmleuv/anprNotWorkingOSM.Rdata") # anprNotWorkingOSM
+load("/tmp/wmleuv/rdata/anprNotWorkingOSM.Rdata") # anprNotWorkingOSM
 
 
 getXs <- function(OSMobj){
@@ -40,7 +40,7 @@ NWAlat = map(anprNotWorkingOSM, getYs)
 notWorkingANPR <- data.frame(longitude = unlist(NWAlong), latitude = unlist(NWAlat))
 sfNotWorkingANPR <- st_as_sf(notWorkingANPR, coords = c("longitude", "latitude"), crs = 4326, agr = "constant")
 
-load("/tmp/wmleuv/leuvCoord.Rdata")
+load("/tmp/wmleuv/rdata/leuvCoord.Rdata")
 
 # Screencapped from OSM & found coords manually
 # TL 50.88763, 4.69553
@@ -64,7 +64,7 @@ riverColor <- apacheColors["brandDarkest"]
 riverSize <- .7
 basePlot <-	ggplot()
 
-load("/tmp/wmleuv/streetsAllowed.Rdata") # streetsAllowed
+load("/tmp/wmleuv/rdata/streetsAllowed.Rdata") # streetsAllowed
 streets2020 <- streetsAllowed
 
 

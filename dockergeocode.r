@@ -193,9 +193,9 @@ streetsAllowed = c(
 			  )
 
 print(anprNotWorking)
-save(anprNotWorking,file="/tmp/wmleuv/anprNotWorking.Rdata")
+save(anprNotWorking,file="/tmp/wmleuv/rdata/anprNotWorking.Rdata")
 #print(streetsAllowed)
-save(streetsAllowed,file="/tmp/wmleuv/streetsAllowed.Rdata")
+save(streetsAllowed,file="/tmp/wmleuv/rdata/streetsAllowed.Rdata")
 
 addCity <- function(street, details=FALSE){
   if(details == TRUE){
@@ -215,8 +215,8 @@ streets2013 = c(
 				"Naamsestraat"
 )
 
-save(streets2005, file="/tmp/wmleuv/streets2005.Rdata")
-save(streets2013, file="/tmp/wmleuv/streets2013.Rdata")
+save(streets2005, file="/tmp/wmleuv/rdata/streets2005.Rdata")
+save(streets2013, file="/tmp/wmleuv/rdata/streets2013.Rdata")
 
 vgz1 = c(
 "Boekhandelstraat",
@@ -278,15 +278,15 @@ vgz2 = c(
 "Vissersstraat"
 )
 
-save(vgz1, file="/tmp/wmleuv/vgz1.Rdata")
-save(vgz2, file="/tmp/wmleuv/vgz2.Rdata")
+save(vgz1, file="/tmp/wmleuv/rdata/vgz1.Rdata")
+save(vgz2, file="/tmp/wmleuv/rdata/vgz2.Rdata")
 
 #streetsAllowedOSM <- streetsAllowed %>% 
 #	map(addCity,details=TRUE) %>%
 #	map(geocode_OSM, details=TRUE)
 
 # Saving due to local cache policy of nominatim.
-#save(streetsAllowedOSM, file="/tmp/wmleuv/streetsAllowedOSM.Rdata")
+#save(streetsAllowedOSM, file="/tmp/wmleuv/rdata/streetsAllowedOSM.Rdata")
 #SAVED 						^^^
 
 anprNotWorkingOSM <- anprNotWorking%>% 
@@ -294,7 +294,7 @@ anprNotWorkingOSM <- anprNotWorking%>%
 	map(geocode_OSM, details=TRUE)
 
 # Saving due to local cache policy of nominatim.
-save(anprNotWorkingOSM, file="/tmp/wmleuv/anprNotWorkingOSM.Rdata")
+save(anprNotWorkingOSM, file="/tmp/wmleuv/rdata/anprNotWorkingOSM.Rdata")
 #SAVED 						^^^
 
 # Single case example first mapping!
@@ -304,8 +304,8 @@ save(anprNotWorkingOSM, file="/tmp/wmleuv/anprNotWorkingOSM.Rdata")
 #	opq_string() %>%
 #	osmdata_sf()
 #print(sfdata)
-#load("/tmp/wmleuv/streetsAllowedOSM.Rdata")
-#load("/tmp/wmleuv/anprNotWorkingOSM.Rdata")
+#load("/tmp/wmleuv/rdata/streetsAllowedOSM.Rdata")
+#load("/tmp/wmleuv/rdata/anprNotWorkingOSM.Rdata")
 
 
 # getIds <- function(osmgcdetails){
@@ -325,7 +325,7 @@ save(anprNotWorkingOSM, file="/tmp/wmleuv/anprNotWorkingOSM.Rdata")
 #      opq()%>%
 #      add_osm_feature(key = "man_made", value="surveillance")%>%
 #      osmdata_sf()
-# save(sunders, file= "/tmp/wmleuv/sunders.Rdata")
+# save(sunders, file= "/tmp/wmleuv/rdata/sunders.Rdata")
 
 leuvCoord <-getbb("Leuven Belgium")
-save(leuvCoord, file= "/tmp/wmleuv/leuvCoord.Rdata")
+save(leuvCoord, file= "/tmp/wmleuv/rdata/leuvCoord.Rdata")

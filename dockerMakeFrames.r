@@ -3,12 +3,12 @@ library(osmdata)
 library(sf)
 #library(purrr) # problems with map function?
 #library(ggimage) solve with PIL
-load("/tmp/wmleuv/streets.Rdata") # streets
-load("/tmp/wmleuv/smallstreets.Rdata") # smallStreets
-load("/tmp/wmleuv/allstreets.Rdata") # allStreets
-load("/tmp/wmleuv/pedStreets.Rdata") # pedStreets
-load("/tmp/wmleuv/dijle.Rdata") # dijle
-load("/tmp/wmleuv/sfAStreets.Rdata")
+load("/tmp/wmleuv/rdata/streets.Rdata") # streets
+load("/tmp/wmleuv/rdata/smallstreets.Rdata") # smallStreets
+load("/tmp/wmleuv/rdata/allstreets.Rdata") # allStreets
+load("/tmp/wmleuv/rdata/pedStreets.Rdata") # pedStreets
+load("/tmp/wmleuv/rdata/dijle.Rdata") # dijle
+load("/tmp/wmleuv/rdata/sfAStreets.Rdata")
 
 
 
@@ -28,7 +28,7 @@ logo <- data.frame(x = c(4.7177),
 				   image = c("/tmp/wmleuv/input/apacheLokaal1.png"))
 
 print(logo)
-load("/tmp/wmleuv/leuvCoord.Rdata")
+load("/tmp/wmleuv/rdata/leuvCoord.Rdata")
 leuvCoord <-getbb("Leuven Belgium")
 xbounds = leuvCoord[1,1:2] + xoffset
 ybounds = leuvCoord[2,1:2] + yoffset
@@ -81,9 +81,9 @@ basePlot <-	ggplot() +
 	  #         size = .4,
 	  #         alpha = .8) +
 
-load("/tmp/wmleuv/streets2005.Rdata") #  streets2005
-load("/tmp/wmleuv/streets2013.Rdata") # streets2013
-load("/tmp/wmleuv/streetsAllowed.Rdata") # streetsAllowed
+load("/tmp/wmleuv/rdata/streets2005.Rdata") #  streets2005
+load("/tmp/wmleuv/rdata/streets2013.Rdata") # streets2013
+load("/tmp/wmleuv/rdata/streetsAllowed.Rdata") # streetsAllowed
 streets2020 <- streetsAllowed
 
 #print(streetsAllowed)

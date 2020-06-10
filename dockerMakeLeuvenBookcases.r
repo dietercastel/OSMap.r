@@ -6,7 +6,7 @@ library(tmaptools)
 library(purrr) # required for map
 library(png)
 
-load("/tmp/wmleuv/leuvCoord.Rdata") # loads leuvCoord
+load("/tmp/wmleuv/rdata/leuvCoord.Rdata") # loads leuvCoord
 
 updateCases <- function(){
 	bookCases <- leuvCoord%>%
@@ -14,7 +14,7 @@ updateCases <- function(){
 	     add_osm_feature(key = "amenity", value="public_bookcase")%>%
 	     osmdata_sf()
 	print(bookCases)
-	save(bookCases, file= "/tmp/wmleuv/bookCases.Rdata")
+	save(bookCases, file= "/tmp/wmleuv/rdata/bookCases.Rdata")
 }
 
 #updateCases() please respect the overpass API policy https://operations.osmfoundation.org/policies/api/ 
@@ -41,7 +41,7 @@ makeRaster <- function(filename, topLeftLat, topLeftLong, botRightLat, botRightL
 
 
 plotCases <- function(xbounds,ybounds,filename){
-	load("/tmp/wmleuv/bookCases.Rdata")
+	load("/tmp/wmleuv/rdata/bookCases.Rdata")
 	tileFrame <- read.csv('/tmp/wmleuv/osmtiling/tilesLeuven.csv')
 	print(tileFrame)
 	annotationRasters <- pmap(tileFrame,makeRaster)

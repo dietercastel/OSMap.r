@@ -2,20 +2,20 @@ library(tidyverse)
 library(osmdata)
 library(sf)
 library(purrr)
-load("/tmp/wmleuv/streets.Rdata") # streets
-load("/tmp/wmleuv/smallstreets.Rdata") # smallStreets
-load("/tmp/wmleuv/allstreets.Rdata") # allStreets
+load("/tmp/wmleuv/rdata/streets.Rdata") # streets
+load("/tmp/wmleuv/rdata/smallstreets.Rdata") # smallStreets
+load("/tmp/wmleuv/rdata/allstreets.Rdata") # allStreets
 ## Loading this large object (150MB) results in killing the process in docker
 ## But not after increasing docker memory.
-load("/tmp/wmleuv/dijle.Rdata")
-#load("/tmp/wmleuv/anprNotWorking.Rdata") # anprNotWorking # List of ANPR adresses 
-load("/tmp/wmleuv/anprNotWorkingOSM.Rdata") # anprNotWorkingOSM # OSM object list of coresponding coords.
-#load("/tmp/wmleuv/sunders.Rdata") # sunders data with OSM carted camera's
+load("/tmp/wmleuv/rdata/dijle.Rdata")
+#load("/tmp/wmleuv/rdata/anprNotWorking.Rdata") # anprNotWorking # List of ANPR adresses 
+load("/tmp/wmleuv/rdata/anprNotWorkingOSM.Rdata") # anprNotWorkingOSM # OSM object list of coresponding coords.
+#load("/tmp/wmleuv/rdata/sunders.Rdata") # sunders data with OSM carted camera's
 
 # Alternative plotting of pedestrian zone
-#load("/tmp/wmleuv/pedStreets.Rdata") # pedStreets
-#load("/tmp/wmleuv/vgz1.Rdata")
-#load("/tmp/wmleuv/vgz2.Rdata")
+#load("/tmp/wmleuv/rdata/pedStreets.Rdata") # pedStreets
+#load("/tmp/wmleuv/rdata/vgz1.Rdata")
+#load("/tmp/wmleuv/rdata/vgz2.Rdata")
 # pedZone <- voetgangerszone1
 # pedZone <- voetgangerszone2
 #pedZone <- c(vgz1,vgz2)
@@ -39,7 +39,7 @@ riverColor <- apacheColors["brandDarkest"]
 riverSize <- .8
 
 #leuvCoord <-getbb("Leuven Belgium")
-load("/tmp/wmleuv/leuvCoord.Rdata")
+load("/tmp/wmleuv/rdata/leuvCoord.Rdata")
 
 
 

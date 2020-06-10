@@ -9,7 +9,7 @@ library(purrr)
 library(OpenStreetMap) # Requires Java
 library(ggplot2)
 
-load("/tmp/wmleuv/leuvCoord.Rdata")
+load("/tmp/wmleuv/rdata/leuvCoord.Rdata")
 
 
 topLeft = c(leuvCoord[2,1],leuvCoord[1,1])

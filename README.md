@@ -31,13 +31,19 @@ The repository map should be synced under `/tmp/wmleuv` and if you open that fol
 
 ```bash
 r dockergeocode.r # required only once for generating necessary Rdata files.
-r dockerMakeFrames.r
-r dockerMakeSmallFrames.r
-r dockerMakeWandeling.r
-r dockerANPROverlay.r
+r dockerMakeFrames.r 
 ```
 
-For the overlay version I manually grabbed a nicely pre-rendered OpenStreetMaps overlay of the required region. I'd still like to automate this step. (Currently a Work In Progress in directory WIP)
+Alternative example files run similarly
+```bash
+# Smallest and most trivial example plotting book cases in Leuven.
+r dockerMakeLeuvenBookcases.r
+r dockerMakeSmallFrames.r
+# Incorporating a GPX track:
+r dockerMakeWandeling.r
+# Overlaying other images:
+r dockerANPROverlay.r
+```
 
 The output is placed inside `output` directory.
 
@@ -80,4 +86,7 @@ Which results in a modern, smaller webm in `./output` instead.
 [De Leuvense Privacy-wandeling van Apache](https://www.facebook.com/events/openbaar-entrepot-voor-de-kunsten-opek/volzet-apache-lokaal-de-slimme-stad/1208596742863953/)
 
 ![Wandeling door het Leuvense stadscentrum.](https://github.com/dietercastel/OSMap.r/raw/wmleuv/output/wanderling2020.png)
+
+All public book cases listed on OSM around Leuven:
+![Publieke boekenkasten op OpenStreetMaps in Leuven](https://github.com/dietercastel/OSMap.r/raw/wmleuv/output/mapBookcase.png)
 

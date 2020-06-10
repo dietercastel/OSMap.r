@@ -85,7 +85,7 @@ Which results in a modern, smaller webm in `./output` instead.
 
 [De Leuvense Privacy-wandeling van Apache](https://www.facebook.com/events/openbaar-entrepot-voor-de-kunsten-opek/volzet-apache-lokaal-de-slimme-stad/1208596742863953/)
 
-![Wandeling door het Leuvense stadscentrum.](https://github.com/dietercastel/OSMap.r/raw/wmleuv/output/wanderling2020.png)
+![Wandeling door het Leuvense stadscentrum.](https://github.com/dietercastel/OSMap.r/raw/wmleuv/output/wandeling2020.png)
 
 All public book cases listed on OSM around Leuven:
 ![Publieke boekenkasten op OpenStreetMaps in Leuven](https://github.com/dietercastel/OSMap.r/raw/wmleuv/output/mapBookcase.png)

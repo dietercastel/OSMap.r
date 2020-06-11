@@ -20,9 +20,9 @@ def download_url(zoom, xtile, ytile):
     subdomain = random.randint(1, 4)
     
     #dir_path = "be/%d/%d/" % (zoom, xtile)
-    dir_path = "be2/"
+    dir_path = "be/"
     url = "https://tile.openstreetmap.be/osmbe/%d/%d/%d.png" % (zoom, xtile, ytile)
-    download_path = "be2/%d-%d-%d.png" % (zoom, xtile, ytile)
+    download_path = "be/%d-%d-%d.png" % (zoom, xtile, ytile)
     
     print(download_path)
     if not os.path.exists(dir_path):

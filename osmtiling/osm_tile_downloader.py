@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+!/usr/local/bin/python3
 # Initially converted with 2to3.py and then tweaked at bit
 # from the original script by tonyrewin at https://gist.github.com/tonyrewin/9444410
 # Author: tonyrewin & Dieter Castel
@@ -56,8 +56,8 @@ def main(argv):
     # redefine me if need so
     minzoom = 14
     maxzoom = 14 
-    latoffset = 0.1
-    lonoffset = 0.05
+    latoffset = 0.3
+    lonoffset = 0.3
 
     # from 0 to 6 download all
     # for zoom in range(0,7,1):

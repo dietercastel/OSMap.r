@@ -15,14 +15,30 @@ def deg2num(lat_deg, lon_deg, zoom):
     ytile = int((1.0 - math.log(math.tan(lat_rad) + (1 / math.cos(lat_rad))) / math.pi) / 2.0 * n)
     return (xtile, ytile)
 
-def makeEmptyFile(zoom,xtile,ytile):
-    dir_path = "fns/"
+def download_url(zoom, xtile, ytile):
+    # Switch between otile1 - otile4
+    subdomain = random.randint(1, 4)
+    
+    #dir_path = "be/%d/%d/" % (zoom, xtile)
+    dir_path = "be2/"
+    url = "https://tile.openstreetmap.be/osmbe/%d/%d/%d.png" % (zoom, xtile, ytile)
+    download_path = "be2/%d-%d-%d.png" % (zoom, xtile, ytile)
+    
+    print(download_path)
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
-    fn = "fns/%d-%d-%d.png" % (zoom, xtile, ytile)
-    print(fn)
-    open(fn,'a').close()
-    return fn
+
+    if(not os.path.isfile(download_path)):
+        print("downloading %r" % url)
+        req = urllib.request.Request(url)
+        req.add_header("User-Agent","osm_tile_downloader.gist")
+        source = urllib.request.urlopen(req)
+        content = source.read()
+        source.close()
+        destination = open(download_path,'wb')
+        destination.write(content)
+        destination.close()
+    else: print("skipped %r" % url)
 
 def usage():
     print("Usage: ")
@@ -51,6 +67,6 @@ def main(argv):
         for x in range(minxt, maxxt+ 1, 1):
             for y in range(maxyt, minyt-1, -1):                
             #for y in range(ytile, final_ytile - 1, -1):                
-                result = makeEmptyFile(zoom, x, y)
+                result = download_url(zoom, x, y)
     
 main(argv)    

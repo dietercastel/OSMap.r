@@ -3,8 +3,7 @@
 DONE 1) Overlay met trasparency rood (heel het grondgebied mobiele camera's)
 DONE 2) tekst:
 Leuven, de rode straten filmt de politie permanent.
-Leuven, in het rode gebied zet de politie mobiele camera's in. 
-+ Jaartal
+Leuven, in het rode gebied zet de politie mobiele camera's in. + Jaartal
 DONE 2) image 1,2 centered, zeker met straatnamen
 DONE 4) Oog/camera in't rood cctv.png
 DONE 5) Lettertype van Apache, \/ a Leuven

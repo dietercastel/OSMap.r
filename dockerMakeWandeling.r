@@ -3,8 +3,8 @@ library(osmdata)
 library(sf)
 library(png)
 
-print(st_layers("/tmp/wmleuv/wandelingLeuven.gpx"))
-gpxLinestring <- st_read("/tmp/wmleuv/wandelingLeuven.gpx",layer="routes")
+#print(st_layers("/tmp/wmleuv/input/wandelingLeuven.gpx"))
+gpxLinestring <- st_read("/tmp/wmleuv/input/wandelingLeuven.gpx",layer="routes")
 mypng <- readPNG('/tmp/wmleuv/input/wandelingOSM.png')
 
 print(gpxLinestring)

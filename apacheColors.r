@@ -1,0 +1,20 @@
+apacheColors<- c(
+black="#222222",
+blackText="#373a3c",
+blackHeadings="#494949",
+textGrey="#999999",
+greyLight="#f2f0f1",
+greyDark="#e2e2e2",
+brandLight="#eafafc",
+brandDefault="#4cbfd3",
+brandDark="#2fa8bd",
+brandDarker="#2da1b5",
+brandDarkest="#257d8e",
+orange="#ff6501",
+error="#ce4544",
+info="#237c8c",
+notice="#e4d03e",
+success="#89d06a",
+yellowLocalDark="#f1e060",
+yellowLocalLight="#ffee98"
+)

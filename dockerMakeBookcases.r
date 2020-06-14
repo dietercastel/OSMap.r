@@ -67,7 +67,7 @@ plotCases <- function(xbounds,ybounds,filename){
 			shape = 22,
 			# different shapes at https://www.datanovia.com/en/wp-content/uploads/dn-tutorials/ggplot2/figures/030-ggplot-point-shapes-r-pch-list-showing-different-point-shapes-in-rstudio-1.png
 			fill = "blue") +
-	boundingBox_sf(xlim = xbounds, 
+	coord_sf(xlim = xbounds, 
 		 ylim = ybounds,
 		 expand = FALSE)+
 	theme_void()+ # remove axis
@@ -76,5 +76,7 @@ plotCases <- function(xbounds,ybounds,filename){
 	)
 
 	ggsave(filename, width = 12, height = 10.5)
+	print(paste("Saved result in", filename))
+	print("Look in the /output folder.")
 }
 plotCases(xbounds,ybounds,"/tmp/wmleuv/output/bookcases.png")

@@ -45,6 +45,7 @@ def usage():
     print("generateFns.py <TopLeftlat(Y1)> <TopLeftlon(X1)> <BotRightLat(Y2)> <BotRightLon(Y2)>")
 
 def main(argv):
+    # TODO: expose zoom as CLI option?
     try:
         script, TLlat, TLlon, BRlat, BRlon = argv
     except:

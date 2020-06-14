@@ -1,4 +1,5 @@
 #!/usr/local/bin/python3
+# This script removes white space from images.
 # From https://stackoverflow.com/questions/10615901/trim-whitespace-using-pil
 import sys
 from PIL import Image, ImageChops

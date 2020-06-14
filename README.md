@@ -1,6 +1,6 @@
 # OSMap.r
 
-Creating custom R maps for 
+Creating custom (OSM-based) maps with R
 
 This project uses:
 
@@ -11,13 +11,15 @@ This project uses:
 
 ## Docker
 
-**You might want to increase your docker memory & swap file size (in Preferences/Advanced) because R (or my code?) has a crashing tendency when not given enough resources.**
+**You might want to increase your docker memory & swap file size (in Preferences/Advanced) because R has a crashing tendency when not given enough resources.**
 See [run options here](https://docs.docker.com/config/containers/resource_constraints/#--memory-swap-details) or do it in your docker preferences.
 
 
 After installing docker pull the required container (with R and all required libraries installed.)
 ```bash
-docker pull robinlovelace/geocompr
+./pullDockerContainers
+# or well just atm
+# docker pull robinlovelace/geocompr 
 ```
 
 Then run a command prompt in the docker:

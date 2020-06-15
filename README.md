@@ -53,6 +53,7 @@ cd osmtiling/
 
 3) Run the book cases example with the same string. 
 
+The r script run is [dockerMakeBookcases.r](https://github.com/dietercastel/OSMap.r/blob/master/dockerMakeBookcases.r) with the given command line argument inside the docker container.
 ```bash
 cd ..
 #~/git/OSMap.r · (master±)

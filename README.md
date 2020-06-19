@@ -25,8 +25,11 @@ Now you're all set!
 
 # Book case example
 
-This will step you to the bookcase example.
+This will step you to the bookcase example. Which comes down to this:
+- Fetch tiles from an OSM tile server
+- Use the Overpass Query API to query some feature (here the "amenity" "bookcase") (see this page for other options  https://wiki.openstreetmap.org/wiki/Map_Features)
 
+### Keep in mind the Tile server/Overpass Query API policy.
 
 1) Get the bounding box and generate a script for downloading the required map tiles.  
 ```bash

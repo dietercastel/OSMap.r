@@ -159,3 +159,6 @@ Which results in a modern, smaller webm in `./output` instead.
 All public book cases listed on OSM around Leuven:
 ![Publieke boekenkasten op OpenStreetMaps in Leuven](https://github.com/dietercastel/OSMap.r/raw/wmleuv/output/mapBookcase.png)
 
+# License
+
+Since the used data is derived from the OpenStreetMap data (using the overpass API) I think the Open Database License applies here. https://en.wikipedia.org/wiki/Open_Database_License

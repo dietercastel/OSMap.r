@@ -7,7 +7,15 @@ This project uses:
 - R scripts (inside Docker for generating map-based visualisations)
 - Python 3 scripts (for post-processing generated images, downloading OSM tiles/some preprocessing)
 - Bash scripts (for minor things)
-- Julia scripts (my legacy, sorrynotsorry.)
+- Julia scripts (for one-of things, (my legacy, sorrynotsorry.))
+
+
+## Disclaimer
+
+This was mainly a project for me to experiment with R (and ggplot) while working on a (hobbyist) data visualization for [Apache](apache.be) and it got a bit out of hand. While it's certainly usable to create static custom maps, for more potent, dynamic, capabilities there exist better tools such as:
+
+- The web based [OpenLayers](https://openlayers.org/en/latest/examples/)
+- Java driven [OpenStreetMap r package](https://cran.r-project.org/web/packages/OpenStreetMap/index.html)
 
 ## Docker
 
